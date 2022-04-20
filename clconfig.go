@@ -25,7 +25,7 @@ type ClokiConfig struct {
 	logName    string
 	logPath    string
 	typeCloki  CLOKI_TYPE
-	Config     *config.ClokiBaseSettingServer
+	Setting    *config.ClokiBaseSettingServer
 }
 
 type CLOKI_TYPE int
@@ -39,8 +39,8 @@ func New(typeCloki CLOKI_TYPE, configPath, logName, logPath string) *ClokiConfig
 
 	c := new(ClokiConfig)
 
-	c.Config = new(config.ClokiBaseSettingServer)
-	defaults.SetDefaults(c.Config) //<-- This set the defaults values
+	c.Setting = new(config.ClokiBaseSettingServer)
+	defaults.SetDefaults(c.Setting) //<-- This set the defaults values
 
 	c.configPath = configPath
 	c.logName = logName
