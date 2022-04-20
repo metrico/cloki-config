@@ -24,9 +24,17 @@ type ClokiConfig struct {
 	configPath string
 	logName    string
 	logPath    string
+	typeCloki  CLOKI_TYPE
 }
 
-func New(configPath, logName, logPath string) *ClokiConfig {
+type CLOKI_TYPE int
+
+const (
+	CLOKI_WRITER CLOKI_TYPE = iota
+	CLOKI_READER
+)
+
+func New(typeCloki CLOKI_TYPE, configPath, logName, logPath string) *ClokiConfig {
 
 	c := new(ClokiConfig)
 
@@ -34,21 +42,33 @@ func New(configPath, logName, logPath string) *ClokiConfig {
 	c.logName = logName
 	c.logPath = logPath
 
+	//Type
+	c.typeCloki = typeCloki
+
 	return c
 }
 
-//https://github.com/atreugo/examples/blob/master/basic/main.go
-//https://github.com/jackwhelpton/fasthttp-routing
-func (c *ClokiConfig) readConfig() {
+func (c *ClokiConfig) ReadConfig() {
 	// Getting constant values
-	if configEnv := os.Getenv("ClOKIWRITERAPPENV"); configEnv != "" {
-		viper.SetConfigName("cloki-writer_" + configEnv)
+
+	envCloki := "ClOKIWRITERAPPENV"
+	envPathCloki := "ClOKIWRITERAPPPATH"
+	envConfig := "cloki-writer"
+
+	if c.typeCloki == CLOKI_READER {
+		envCloki = "CLOKIGOENV"
+		envPathCloki = "CLOKIGOPATH"
+		envConfig = "cloki_go"
+	}
+
+	if configEnv := os.Getenv(envCloki); configEnv != "" {
+		viper.SetConfigName(envConfig + "_" + configEnv)
 	} else {
-		viper.SetConfigName("cloki-writer")
+		viper.SetConfigName(envConfig)
 	}
 	viper.SetConfigType("json")
 
-	if configPath := os.Getenv("ClOKIWRITERAPPPATH"); configPath != "" {
+	if configPath := os.Getenv(envPathCloki); configPath != "" {
 		viper.AddConfigPath(configPath)
 	} else {
 		viper.AddConfigPath(c.configPath)
@@ -62,7 +82,7 @@ func (c *ClokiConfig) readConfig() {
 		fmt.Println("No configuration file loaded - checking env: ", err)
 	}
 
-	viper.SetConfigName("cloki-writer_custom")
+	viper.SetConfigName(envConfig + "_custom")
 	err = viper.MergeInConfig()
 	if err != nil {
 		fmt.Println("No custom configuration file loaded.")
@@ -150,7 +170,7 @@ func (c *ClokiConfig) readConfig() {
 }
 
 //system params for replications, groups
-func (c *ClokiConfig) setFastConfigSettings() {
+func (c *ClokiConfig) SetFastConfigSettings() {
 
 	/***********************************/
 	switch config.Setting.SYSTEM_SETTINGS.HashType {
