@@ -96,10 +96,10 @@ func (c *ClokiConfig) ReadConfig() {
 	viper.AutomaticEnv()
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "[", "_", "]", ""))
 	viper.SetEnvPrefix(config.Setting.EnvPrefix)
-	c.SetEnvironDataBase()
+	c.setEnvironDataBase()
 
 	//Bind Env from Config
-	c.BindEnvs(config.Setting)
+	c.bindEnvs(config.Setting)
 
 	err = viper.Unmarshal(&config.Setting, func(config *mapstructure.DecoderConfig) {
 		config.TagName = "json"
@@ -213,7 +213,7 @@ func (c *ClokiConfig) SetFastConfigSettings() {
 
 //this function will check CLOKI_DATABASE_DATA and set internal bind for viper
 //i.e. CLOKI_DATABASE_DATA_0_HOSTNAME -> database_data[0].hostname
-func (c *ClokiConfig) SetEnvironDataBase() bool {
+func (c *ClokiConfig) setEnvironDataBase() bool {
 
 	var re = regexp.MustCompile(`_(\d)_`)
 	for _, s := range os.Environ() {
@@ -228,7 +228,7 @@ func (c *ClokiConfig) SetEnvironDataBase() bool {
 }
 
 //Now we should bind the ENV params
-func (c *ClokiConfig) BindEnvs(iface interface{}, parts ...string) {
+func (c *ClokiConfig) bindEnvs(iface interface{}, parts ...string) {
 	ifv := reflect.ValueOf(iface)
 	ift := reflect.TypeOf(iface)
 	for i := 0; i < ift.NumField(); i++ {
@@ -240,7 +240,7 @@ func (c *ClokiConfig) BindEnvs(iface interface{}, parts ...string) {
 		}
 		switch v.Kind() {
 		case reflect.Struct:
-			c.BindEnvs(v.Interface(), append(parts, tv)...)
+			c.bindEnvs(v.Interface(), append(parts, tv)...)
 		case reflect.Slice:
 			continue
 		default:
