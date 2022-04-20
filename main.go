@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 
 	//"database/sql"
-	"flag"
+
 	"fmt"
 	"os"
 	"reflect"
@@ -19,47 +19,22 @@ import (
 	"github.com/spf13/viper"
 )
 
-// Note: Vipers are not safe for concurrent Get() and Set() operations.
+// Note: ClokiConfig
 type ClokiConfig struct {
-	// Delimiter that separates a list of keys
-	// used to access a nested value in one go
-	keyDelim string
-
-	// A set of paths to look for the config file in
-	configPaths []string
+	configPath string
+	logName    string
+	logPath    string
 }
 
-func New() *ClokiConfig {
+func New(configPath, logName, logPath string) *ClokiConfig {
 
 	c := new(ClokiConfig)
 
+	c.configPath = configPath
+	c.logName = logName
+	c.logPath = logPath
+
 	return c
-}
-
-func (c *ClokiConfig) checkHelpVersionFlags() {
-	if *appFlags.ShowHelpMessage {
-		flag.Usage()
-		os.Exit(0)
-	}
-
-	if *appFlags.ShowVersion {
-		fmt.Printf("VERSION: %s\r\n", VERSION_APPLICATION)
-		os.Exit(0)
-	}
-
-	if *appFlags.GenerateKey {
-		strLic, err := license.GenerateKey()
-		if err == nil {
-			if _, err := os.Stdout.WriteString(strLic + "\r\n"); err != nil {
-				fmt.Print("couldn't generate a key: ", err.Error())
-			}
-		} else {
-			fmt.Print("couldn't generate a key: ", err.Error())
-		}
-
-		os.Exit(0)
-	}
-
 }
 
 //https://github.com/atreugo/examples/blob/master/basic/main.go
@@ -76,7 +51,7 @@ func (c *ClokiConfig) readConfig() {
 	if configPath := os.Getenv("ClOKIWRITERAPPPATH"); configPath != "" {
 		viper.AddConfigPath(configPath)
 	} else {
-		viper.AddConfigPath(*appFlags.ConfigPath)
+		viper.AddConfigPath(c.configPath)
 	}
 
 	viper.AddConfigPath(".")
@@ -85,29 +60,28 @@ func (c *ClokiConfig) readConfig() {
 	err := viper.ReadInConfig()
 	if err != nil {
 		fmt.Println("No configuration file loaded - checking env: ", err)
-		logger.Error("No configuration file loaded - using defaults - checking env")
 	}
 
 	viper.SetConfigName("cloki-writer_custom")
 	err = viper.MergeInConfig()
 	if err != nil {
-		logger.Debug("No custom configuration file loaded.")
+		fmt.Println("No custom configuration file loaded.")
 	}
 
 	//Env variables
 	viper.AutomaticEnv()
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "[", "_", "]", ""))
 	viper.SetEnvPrefix(config.Setting.EnvPrefix)
-	SetEnvironDataBase()
+	c.SetEnvironDataBase()
 
 	//Bind Env from Config
-	BindEnvs(config.Setting)
+	c.BindEnvs(config.Setting)
 
 	err = viper.Unmarshal(&config.Setting, func(config *mapstructure.DecoderConfig) {
 		config.TagName = "json"
 	})
 	if err != nil {
-		logger.Debug("couldn't unmarshal viper.")
+		fmt.Println("couldn't unmarshal viper.")
 	}
 
 	var re = regexp.MustCompile(`database_data\[(\d)\]`)
@@ -134,7 +108,7 @@ func (c *ClokiConfig) readConfig() {
 			defaults.SetDefaults(&data) //<-- This set the defaults values
 			err := mapstructure.Decode(val, &data)
 			if err != nil {
-				logger.Error("ERROR during mapstructure decode[1]:", err)
+				fmt.Println("ERROR during mapstructure decode[1]:", err)
 			}
 			config.Setting.DATABASE_DATA = append(config.Setting.DATABASE_DATA, data)
 		}
@@ -150,26 +124,26 @@ func (c *ClokiConfig) readConfig() {
 		if len(config.Setting.DATABASE_DATA) > idx {
 			err := mapstructure.Decode(val, &config.Setting.DATABASE_DATA[idx])
 			if err != nil {
-				logger.Error("ERROR during mapstructure decode[0]:", err)
+				fmt.Println("ERROR during mapstructure decode[0]:", err)
 			}
 		} else {
 			data := config.ClokiWriterDataBase{}
 			defaults.SetDefaults(&data) //<-- This set the defaults values
 			err := mapstructure.Decode(val, &data)
 			if err != nil {
-				logger.Error("ERROR during mapstructure decode[1]:", err)
+				fmt.Println("ERROR during mapstructure decode[1]:", err)
 			}
 			config.Setting.DATABASE_DATA = append(config.Setting.DATABASE_DATA, data)
 		}
 	}
 
 	//Check the command line
-	if *appFlags.LogName != "" {
-		config.Setting.LOG_SETTINGS.Name = *appFlags.LogName
+	if c.logName != "" {
+		config.Setting.LOG_SETTINGS.Name = c.logName
 	}
 
-	if *appFlags.LogPath != "" {
-		config.Setting.LOG_SETTINGS.Path = *appFlags.LogPath
+	if c.logPath != "" {
+		config.Setting.LOG_SETTINGS.Path = c.logPath
 	}
 
 	//viper.Debug()
