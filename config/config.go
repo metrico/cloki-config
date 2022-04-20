@@ -6,17 +6,43 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-var Setting ClokiWriterSettingServer
-
-//NAME
-var NAME_APPLICATION = "cloki-writer"
+var Setting ClokiBaseSettingServer
 
 const (
 	FINGERPRINT_Bernstein = iota
 	FINGERPRINT_CityHash
 )
 
-type ClokiWriterDataBase struct {
+// ============================ WRITER ONLY ================================= //
+type MQTTTopicConf struct {
+	Name           string            `json:"name" mapstructure:"name" default:""`
+	Tags           map[string]string `json:"tags" mapstructure:"tags" default:""`
+	IncludeTopic   bool              `json:"include_topic" mapstructure:"include_topic" default:"true"`
+	Format         string            `json:"format" mapstructure:"format" default:""`
+	Extract        [][]string        `json:"extract" mapstructure:"extract" default:"[]"`
+	TimestampField []string          `json:"timestamp" mapstructure:"timestamp" default:"[]"`
+	// ns, us, ms, s, m, h
+	TimeUnit string `json:"time_unit" mapstructure:"time_unit" default:""`
+}
+
+//
+type ClokiWriterSettingServer struct {
+	MQTT_CLIENT struct {
+		SessID     string        `json:"session" mapstructure:"session" default:"cloki-client"`
+		ServerHost string        `json:"host" mapstructure:"host" default:""`
+		ServerPort uint32        `json:"port" mapstructure:"port" default:""`
+		User       string        `json:"user" mapstructure:"user" default:""`
+		Password   string        `json:"password" mapstructure:"password" default:""`
+		Topic      MQTTTopicConf `json:"topic" mapstructure:"topic" default:""`
+	} `json:"mqtt" mapstructure:"mqtt"`
+}
+
+// ============================ READER ONLY ================================= //
+type ClokiReaderSettingServer struct {
+}
+
+// ============================ BASE ONLY ================================= //
+type ClokiBaseDataBase struct {
 	User         string `json:"user" mapstructure:"user" default:"cloki_user"`
 	Node         string `json:"node" mapstructure:"node" default:"clokinode"`
 	Password     string `json:"pass" mapstructure:"pass" default:"cloki_pass"`
@@ -35,7 +61,11 @@ type ClokiWriterDataBase struct {
 	Strategy     string `json:"strategy" mapstructure:"strategy" default:"failover"`
 }
 
-type ClokiWriterSettingServer struct {
+type ClokiBaseSettingServer struct {
+	ClokiWriter ClokiWriterSettingServer
+	ClokiReader ClokiReaderSettingServer
+
+	//Base
 	SrartTime                time.Time `default:""`
 	FingerPrintType          uint      `default:"0"`
 	DataBaseStrategy         uint      `default:"0"`
@@ -43,8 +73,9 @@ type ClokiWriterSettingServer struct {
 	DataDatabaseGroupNodeMap map[string][]string
 	Validate                 *validator.Validate
 	EnvPrefix                string `default:"CLOKI"`
+	PluginsPath              string `default:""`
 
-	DATABASE_DATA []ClokiWriterDataBase `json:"database_data" mapstructure:"database_data"`
+	DATABASE_DATA []ClokiBaseDataBase `json:"database_data" mapstructure:"database_data"`
 
 	SYSTEM_SETTINGS struct {
 		HostName             string  `json:"hostname" mapstructure:"hostname" default:"hostname"`
@@ -104,7 +135,7 @@ type ClokiWriterSettingServer struct {
 		RotationHours uint32 `json:"rotation_hours" mapstructure:"rotation_hours" default:"24"`
 		Path          string `json:"path" mapstructure:"path" default:"./"`
 		Level         string `json:"level" mapstructure:"level" default:"error"`
-		Name          string `json:"name" mapstructure:"name" default:"clokiwriter.log"`
+		Name          string `json:"name" mapstructure:"name" default:"ClokiBase.log"`
 		Stdout        bool   `json:"stdout" mapstructure:"stdout" default:"false"`
 		Json          bool   `json:"json" mapstructure:"json" default:"true"`
 		SysLogLevel   string `json:"syslog_level" mapstructure:"syslog_level" default:"LOG_INFO"`

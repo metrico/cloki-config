@@ -128,7 +128,7 @@ func (c *ClokiConfig) ReadConfig() {
 		dataVal := dataConfig.([]interface{})
 		for idx := range dataVal {
 			val := dataVal[idx].(map[string]interface{})
-			data := config.ClokiWriterDataBase{}
+			data := config.ClokiBaseDataBase{}
 			defaults.SetDefaults(&data) //<-- This set the defaults values
 			err := mapstructure.Decode(val, &data)
 			if err != nil {
@@ -151,7 +151,7 @@ func (c *ClokiConfig) ReadConfig() {
 				fmt.Println("ERROR during mapstructure decode[0]:", err)
 			}
 		} else {
-			data := config.ClokiWriterDataBase{}
+			data := config.ClokiBaseDataBase{}
 			defaults.SetDefaults(&data) //<-- This set the defaults values
 			err := mapstructure.Decode(val, &data)
 			if err != nil {
