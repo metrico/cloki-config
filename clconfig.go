@@ -171,11 +171,11 @@ func (c *ClokiConfig) ReadConfig() {
 	}
 
 	//viper.Debug()
-	c.SetFastConfigSettings()
+	c.setFastConfigSettings()
 }
 
 //system params for replications, groups
-func (c *ClokiConfig) SetFastConfigSettings() {
+func (c *ClokiConfig) setFastConfigSettings() {
 
 	/***********************************/
 	switch config.Setting.SYSTEM_SETTINGS.HashType {
