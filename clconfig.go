@@ -21,11 +21,11 @@ import (
 
 // Note: ClokiConfig
 type ClokiConfig struct {
-	configPath   string
-	logName      string
-	logPath      string
-	typeCloki    CLOKI_TYPE
-	ConfigWriter *config.ClokiWriterSettingServer
+	configPath string
+	logName    string
+	logPath    string
+	typeCloki  CLOKI_TYPE
+	Config     *config.ClokiBaseDataBase
 }
 
 type CLOKI_TYPE int
@@ -39,8 +39,8 @@ func New(typeCloki CLOKI_TYPE, configPath, logName, logPath string) *ClokiConfig
 
 	c := new(ClokiConfig)
 
-	c.ConfigWriter = new(config.ClokiWriterSettingServer)
-	defaults.SetDefaults(c.ConfigWriter) //<-- This set the defaults values
+	c.Config = new(config.ClokiBaseDataBase)
+	defaults.SetDefaults(c.Config) //<-- This set the defaults values
 
 	c.configPath = configPath
 	c.logName = logName
