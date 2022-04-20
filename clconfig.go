@@ -21,10 +21,11 @@ import (
 
 // Note: ClokiConfig
 type ClokiConfig struct {
-	configPath string
-	logName    string
-	logPath    string
-	typeCloki  CLOKI_TYPE
+	configPath   string
+	logName      string
+	logPath      string
+	typeCloki    CLOKI_TYPE
+	ConfigWriter *config.ClokiWriterSettingServer
 }
 
 type CLOKI_TYPE int
@@ -37,6 +38,9 @@ const (
 func New(typeCloki CLOKI_TYPE, configPath, logName, logPath string) *ClokiConfig {
 
 	c := new(ClokiConfig)
+
+	c.ConfigWriter = new(config.ClokiWriterSettingServer)
+	defaults.SetDefaults(c.ConfigWriter) //<-- This set the defaults values
 
 	c.configPath = configPath
 	c.logName = logName
@@ -167,6 +171,7 @@ func (c *ClokiConfig) ReadConfig() {
 	}
 
 	//viper.Debug()
+	c.SetFastConfigSettings()
 }
 
 //system params for replications, groups
