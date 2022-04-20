@@ -15,6 +15,7 @@ import (
 
 	"github.com/mcuadros/go-defaults"
 	"github.com/metrico/cloki-config/config"
+	"github.com/metrico/cloki-config/config/writer"
 	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 )
@@ -180,10 +181,10 @@ func (c *ClokiConfig) setFastConfigSettings() {
 	/***********************************/
 	switch config.Setting.SYSTEM_SETTINGS.HashType {
 	case "cityhash":
-		config.Setting.FingerPrintType = config.FINGERPRINT_CityHash
+		config.Setting.FingerPrintType = writer.FINGERPRINT_CityHash
 	case "bernstein":
 	case "default":
-		config.Setting.FingerPrintType = config.FINGERPRINT_Bernstein
+		config.Setting.FingerPrintType = writer.FINGERPRINT_Bernstein
 	}
 
 	minVersion := config.Setting.HTTPS_SETTINGS.MinTLSVersionString
