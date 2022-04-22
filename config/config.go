@@ -8,8 +8,6 @@ import (
 	"gopkg.in/go-playground/validator.v9"
 )
 
-var Setting ClokiBaseSettingServer
-
 // ============================ BASE ONLY ================================= //
 type ClokiBaseDataBase struct {
 	User         string `json:"user" mapstructure:"user" default:"cloki_user"`

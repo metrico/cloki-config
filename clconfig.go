@@ -22,11 +22,11 @@ import (
 
 // Note: ClokiConfig
 type ClokiConfig struct {
-	configPath string
-	logName    string
-	logPath    string
-	typeCloki  CLOKI_TYPE
-	Setting    *config.ClokiBaseSettingServer
+	configPaths []string
+	logName     string
+	logPath     string
+	typeCloki   CLOKI_TYPE
+	Setting     *config.ClokiBaseSettingServer
 }
 
 type CLOKI_TYPE int
@@ -36,15 +36,17 @@ const (
 	CLOKI_READER
 )
 
-func New(typeCloki CLOKI_TYPE, configPath, logName, logPath string) *ClokiConfig {
+func New(typeCloki CLOKI_TYPE, configPath string, mergePaths []string, logName, logPath string) *ClokiConfig {
 
 	c := new(ClokiConfig)
 
 	c.Setting = new(config.ClokiBaseSettingServer)
 	defaults.SetDefaults(c.Setting) //<-- This set the defaults values
 
-	c.configPath = configPath
-	c.logName = logName
+	c.configPaths = []string{configPath}
+	for _, p := range mergePaths {
+		c.configPaths = append(c.configPaths, p)
+	}
 	c.logPath = logPath
 
 	//Type
@@ -53,56 +55,38 @@ func New(typeCloki CLOKI_TYPE, configPath, logName, logPath string) *ClokiConfig
 	return c
 }
 
+func (c *ClokiConfig) readConfigFromFS() {
+	cnt := 0
+	for _, p := range c.configPaths {
+		if len(p) < 5 || p[len(p)-5:] != ".json" {
+			fmt.Printf("only json extension allowed: %s\n", p)
+		}
+		viper.SetConfigFile(p)
+		if cnt == 0 {
+			viper.ReadInConfig()
+			cnt++
+			continue
+		}
+		viper.MergeInConfig()
+		cnt++
+	}
+}
+
 func (c *ClokiConfig) ReadConfig() {
 	// Getting constant values
 
-	envCloki := "ClOKIWRITERAPPENV"
-	envPathCloki := "ClOKIWRITERAPPPATH"
-	envConfig := "cloki-writer"
-
-	if c.typeCloki == CLOKI_READER {
-		envCloki = "CLOKIGOENV"
-		envPathCloki = "CLOKIGOPATH"
-		envConfig = "cloki_go"
-	}
-
-	if configEnv := os.Getenv(envCloki); configEnv != "" {
-		viper.SetConfigName(envConfig + "_" + configEnv)
-	} else {
-		viper.SetConfigName(envConfig)
-	}
-	viper.SetConfigType("json")
-
-	if configPath := os.Getenv(envPathCloki); configPath != "" {
-		viper.AddConfigPath(configPath)
-	} else {
-		viper.AddConfigPath(c.configPath)
-	}
-
-	viper.AddConfigPath(".")
-
-	//Default value
-	err := viper.ReadInConfig()
-	if err != nil {
-		fmt.Println("No configuration file loaded - checking env: ", err)
-	}
-
-	viper.SetConfigName(envConfig + "_custom")
-	err = viper.MergeInConfig()
-	if err != nil {
-		fmt.Println("No custom configuration file loaded.")
-	}
+	c.readConfigFromFS()
 
 	//Env variables
 	viper.AutomaticEnv()
 	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "[", "_", "]", ""))
-	viper.SetEnvPrefix(config.Setting.EnvPrefix)
+	viper.SetEnvPrefix(c.Setting.EnvPrefix)
 	c.setEnvironDataBase()
 
 	//Bind Env from Config
-	c.bindEnvs(config.Setting)
+	c.bindEnvs(*c.Setting)
 
-	err = viper.Unmarshal(&config.Setting, func(config *mapstructure.DecoderConfig) {
+	err := viper.Unmarshal(c.Setting, func(config *mapstructure.DecoderConfig) {
 		config.TagName = "json"
 	})
 	if err != nil {
@@ -124,7 +108,7 @@ func (c *ClokiConfig) ReadConfig() {
 
 	//Read the data db connection from config. This is fix because defaults doesn't know the size of array
 	if viper.IsSet("database_data") {
-		config.Setting.DATABASE_DATA = nil
+		c.Setting.DATABASE_DATA = nil
 		dataConfig := viper.Get("database_data")
 		dataVal := dataConfig.([]interface{})
 		for idx := range dataVal {
@@ -135,7 +119,7 @@ func (c *ClokiConfig) ReadConfig() {
 			if err != nil {
 				fmt.Println("ERROR during mapstructure decode[1]:", err)
 			}
-			config.Setting.DATABASE_DATA = append(config.Setting.DATABASE_DATA, data)
+			c.Setting.DATABASE_DATA = append(c.Setting.DATABASE_DATA, data)
 		}
 	}
 
@@ -146,8 +130,8 @@ func (c *ClokiConfig) ReadConfig() {
 		value := allSettings[fmt.Sprintf("database_data[%d]", idx)]
 		val := value.(map[string]interface{})
 		//If the configuration already exists - we replace only existing params
-		if len(config.Setting.DATABASE_DATA) > idx {
-			err := mapstructure.Decode(val, &config.Setting.DATABASE_DATA[idx])
+		if len(c.Setting.DATABASE_DATA) > idx {
+			err := mapstructure.Decode(val, &c.Setting.DATABASE_DATA[idx])
 			if err != nil {
 				fmt.Println("ERROR during mapstructure decode[0]:", err)
 			}
@@ -158,57 +142,58 @@ func (c *ClokiConfig) ReadConfig() {
 			if err != nil {
 				fmt.Println("ERROR during mapstructure decode[1]:", err)
 			}
-			config.Setting.DATABASE_DATA = append(config.Setting.DATABASE_DATA, data)
+			c.Setting.DATABASE_DATA = append(c.Setting.DATABASE_DATA, data)
 		}
 	}
 
 	//Check the command line
 	if c.logName != "" {
-		config.Setting.LOG_SETTINGS.Name = c.logName
+		c.Setting.LOG_SETTINGS.Name = c.logName
 	}
 
 	if c.logPath != "" {
-		config.Setting.LOG_SETTINGS.Path = c.logPath
+		c.Setting.LOG_SETTINGS.Path = c.logPath
 	}
 
 	//viper.Debug()
 	c.setFastConfigSettings()
+	//c.Setting = &c.Setting
 }
 
 //system params for replications, groups
 func (c *ClokiConfig) setFastConfigSettings() {
 
 	/***********************************/
-	switch config.Setting.SYSTEM_SETTINGS.HashType {
+	switch c.Setting.SYSTEM_SETTINGS.HashType {
 	case "cityhash":
-		config.Setting.FingerPrintType = writer.FINGERPRINT_CityHash
+		c.Setting.FingerPrintType = writer.FINGERPRINT_CityHash
 	case "bernstein":
 	case "default":
-		config.Setting.FingerPrintType = writer.FINGERPRINT_Bernstein
+		c.Setting.FingerPrintType = writer.FINGERPRINT_Bernstein
 	}
 
-	minVersion := config.Setting.HTTPS_SETTINGS.MinTLSVersionString
+	minVersion := c.Setting.HTTPS_SETTINGS.MinTLSVersionString
 
 	if minVersion == "TLS1.0" {
-		config.Setting.HTTPS_SETTINGS.MinTLSVersion = tls.VersionTLS10
+		c.Setting.HTTPS_SETTINGS.MinTLSVersion = tls.VersionTLS10
 	} else if minVersion == "TLS1.1" {
-		config.Setting.HTTPS_SETTINGS.MinTLSVersion = tls.VersionTLS11
+		c.Setting.HTTPS_SETTINGS.MinTLSVersion = tls.VersionTLS11
 	} else if minVersion == "TLS1.2" {
-		config.Setting.HTTPS_SETTINGS.MinTLSVersion = tls.VersionTLS12
+		c.Setting.HTTPS_SETTINGS.MinTLSVersion = tls.VersionTLS12
 	} else if minVersion == "TLS1.3" {
-		config.Setting.HTTPS_SETTINGS.MinTLSVersion = tls.VersionTLS13
+		c.Setting.HTTPS_SETTINGS.MinTLSVersion = tls.VersionTLS13
 	}
 
-	maxVersion := config.Setting.HTTPS_SETTINGS.MaxTLSVersionString
+	maxVersion := c.Setting.HTTPS_SETTINGS.MaxTLSVersionString
 
 	if maxVersion == "TLS1.0" {
-		config.Setting.HTTPS_SETTINGS.MaxTLSVersion = tls.VersionTLS10
+		c.Setting.HTTPS_SETTINGS.MaxTLSVersion = tls.VersionTLS10
 	} else if maxVersion == "TLS1.1" {
-		config.Setting.HTTPS_SETTINGS.MaxTLSVersion = tls.VersionTLS11
+		c.Setting.HTTPS_SETTINGS.MaxTLSVersion = tls.VersionTLS11
 	} else if maxVersion == "TLS1.2" {
-		config.Setting.HTTPS_SETTINGS.MaxTLSVersion = tls.VersionTLS12
+		c.Setting.HTTPS_SETTINGS.MaxTLSVersion = tls.VersionTLS12
 	} else if maxVersion == "TLS1.3" {
-		config.Setting.HTTPS_SETTINGS.MaxTLSVersion = tls.VersionTLS13
+		c.Setting.HTTPS_SETTINGS.MaxTLSVersion = tls.VersionTLS13
 	}
 }
 
@@ -218,9 +203,9 @@ func (c *ClokiConfig) setEnvironDataBase() bool {
 
 	var re = regexp.MustCompile(`_(\d)_`)
 	for _, s := range os.Environ() {
-		if strings.HasPrefix(s, config.Setting.EnvPrefix+"_DATABASE_DATA") {
+		if strings.HasPrefix(s, c.Setting.EnvPrefix+"_DATABASE_DATA") {
 			a := strings.Split(s, "=")
-			key := strings.TrimPrefix(a[0], config.Setting.EnvPrefix+"_")
+			key := strings.TrimPrefix(a[0], c.Setting.EnvPrefix+"_")
 			key = re.ReplaceAllString(key, "[$1].")
 			viper.BindEnv(key)
 		}
