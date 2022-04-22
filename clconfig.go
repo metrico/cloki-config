@@ -64,11 +64,18 @@ func (c *ClokiConfig) readConfigFromFS() {
 		}
 		viper.SetConfigFile(p)
 		if cnt == 0 {
-			viper.ReadInConfig()
+			err := viper.ReadInConfig()
+			if err != nil {
+				fmt.Println(err)
+				continue
+			}
 			cnt++
 			continue
 		}
-		viper.MergeInConfig()
+		err := viper.MergeInConfig()
+		if err != nil {
+			fmt.Println(err)
+		}
 		cnt++
 	}
 }
