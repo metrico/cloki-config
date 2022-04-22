@@ -60,6 +60,7 @@ func (c *ClokiConfig) readConfigFromFS() {
 	for _, p := range c.configPaths {
 		if len(p) < 5 || p[len(p)-5:] != ".json" {
 			fmt.Printf("only json extension allowed: %s\n", p)
+			continue
 		}
 		viper.SetConfigFile(p)
 		if cnt == 0 {
