@@ -29,8 +29,8 @@ type ClokiBaseDataBase struct {
 }
 
 type ClokiBaseSettingServer struct {
-	ClokiWriter writer.ClokiWriterSettingServer
-	ClokiReader reader.ClokiReaderSettingServer
+	ClokiWriter writer.ClokiWriterSettingServer `json:"writer" mapstructure:"writer"`
+	ClokiReader reader.ClokiReaderSettingServer `json:"reader" mapstructure:"reader"`
 
 	//Base
 	SrartTime                time.Time `default:""`
