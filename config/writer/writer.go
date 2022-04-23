@@ -51,4 +51,11 @@ type ClokiWriterSettingServer struct {
 		Topic      MQTTTopicConf `json:"topic" mapstructure:"topic" default:""`
 	} `json:"mqtt" mapstructure:"mqtt"`
 	KAFKA_CLIENT KafkaConf `json:"kafka" mapstructure:"kafka" default:""`
+	NATS         struct {
+		External string `json:"external" mapstructure:"external" default:""`
+		Bind     string `json:"bind" mapstructure:"bind" default:"0.0.0.0"`
+		Port     int    `json:"port" mapstructure:"port" default:"4444"`
+		User     string `json:"user" mapstructure:"user" default:""`
+		Password string `json:"password" mapstructure:"password" default:""`
+	} `json:"nats" mapstructure:"nats"`
 }
