@@ -28,6 +28,7 @@ type ClokiBaseDataBase struct {
 	Strategy      string `json:"strategy" mapstructure:"strategy" default:"failover"`
 	TTLDays       int    `json:"ttl_days" mapstructure:"ttl_days" default:"7"`
 	StoragePolicy string `json:"storage_policy" mapstructure:"storage_policy" default:""`
+	Secure        bool   `json:"secure" mapstructure:"secure" default:"false"`
 }
 
 type ClokiBaseSettingServer struct {
