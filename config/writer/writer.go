@@ -45,7 +45,7 @@ type PrometheusScrape struct {
 	ScrapeInterval int    `json:"scrape_interval" mapstructure:"scrape_interval" default:"60"`
 	InstanceTag    string `json:"instance_tag" mapstructure:"instance_tag" default:"instance"`
 	EndpointTag    string `json:"endpoint_tag" mapstructure:"endpoint_tag" default:"endpoint"`
-	Enable         bool   `json:"enable" mapstructure:"enable" default:"true"`
+	Enable         bool   `json:"enable" mapstructure:"enable" default:"false"`
 }
 
 //
