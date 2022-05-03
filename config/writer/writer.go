@@ -40,6 +40,14 @@ type KafkaConf struct {
 	GroupID  string         `json:"consumer_group" mapstructure:"consumer_group" default:""`
 }
 
+type PrometheusScrape struct {
+	Endpoint       string `json:"endpoint" mapstructure:"endpoint" default:"https://user:password@127.0.0.1:9099/metrics"`
+	ScrapeInterval int    `json:"scrape_interval" mapstructure:"scrape_interval" default:"60"`
+	InstanceTag    string `json:"instance_tag" mapstructure:"instance_tag" default:"instance"`
+	EndpointTag    string `json:"endpoint_tag" mapstructure:"endpoint_tag" default:"endpoint"`
+	Enable         bool   `json:"enable" mapstructure:"enable" default:"true"`
+}
+
 //
 type ClokiWriterSettingServer struct {
 	MQTT_CLIENT struct {
@@ -58,4 +66,5 @@ type ClokiWriterSettingServer struct {
 		User     string `json:"user" mapstructure:"user" default:""`
 		Password string `json:"password" mapstructure:"password" default:""`
 	} `json:"nats" mapstructure:"nats"`
+	PROMETHEUS_SCRAPE []PrometheusScrape `json:"prometheus_scrape" mapstructure:"prometheus_scrape"`
 }
