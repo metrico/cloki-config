@@ -104,7 +104,7 @@ func (c *ClokiConfig) ReadConfig() {
 	var re = regexp.MustCompile(`database_data\[(\d)\]`)
 	envParams := []int{}
 	allSettings := viper.AllSettings()
-	for key, _ := range allSettings {
+	for key := range allSettings {
 		if strings.HasPrefix(key, "database_data[") {
 			key = re.ReplaceAllString(key, "$1")
 			i, err := strconv.Atoi(key)
@@ -151,6 +151,59 @@ func (c *ClokiConfig) ReadConfig() {
 				fmt.Println("ERROR during mapstructure decode[1]:", err)
 			}
 			c.Setting.DATABASE_DATA = append(c.Setting.DATABASE_DATA, data)
+		}
+	}
+
+	//Prometheus scrapper
+	re = regexp.MustCompile(`prometheus_scrape\[(\d)\]`)
+	envParams = []int{}
+	for key := range allSettings {
+		if strings.HasPrefix(key, "prometheus_scrape[") {
+			key = re.ReplaceAllString(key, "$1")
+			i, err := strconv.Atoi(key)
+			if err == nil {
+				envParams = append(envParams, i)
+			}
+		}
+	}
+
+	//Read the data prometheus_scrape from config. This is fix because defaults doesn't know the size of array
+	if viper.IsSet("prometheus_scrape") {
+		c.Setting.ClokiWriter.PROMETHEUS_SCRAPE = nil
+		scraperConfig := viper.Get("prometheus_scrape")
+		dataVal := scraperConfig.([]interface{})
+		for idx := range dataVal {
+			val := dataVal[idx].(map[string]interface{})
+			data := writer.PrometheusScrape{}
+			defaults.SetDefaults(&data) //<-- This set the defaults values
+			err := mapstructure.Decode(val, &data)
+			if err != nil {
+				fmt.Println("ERROR during mapstructure decode[1]:", err)
+			}
+			c.Setting.ClokiWriter.PROMETHEUS_SCRAPE = append(c.Setting.ClokiWriter.PROMETHEUS_SCRAPE, data)
+		}
+	}
+
+	//We should do extraction and after sorting 0,1,2,3
+	sort.Ints(envParams[:])
+	//Here we do ENV check
+	for _, idx := range envParams {
+		value := allSettings[fmt.Sprintf("prometheus_scrape[%d]", idx)]
+		val := value.(map[string]interface{})
+		//If the configuration already exists - we replace only existing params
+		if len(c.Setting.ClokiWriter.PROMETHEUS_SCRAPE) > idx {
+			err := mapstructure.Decode(val, &c.Setting.ClokiWriter.PROMETHEUS_SCRAPE[idx])
+			if err != nil {
+				fmt.Println("ERROR during mapstructure scraper decode[0]:", err)
+			}
+		} else {
+			data := writer.PrometheusScrape{}
+			defaults.SetDefaults(&data) //<-- This set the defaults values
+			err := mapstructure.Decode(val, &data)
+			if err != nil {
+				fmt.Println("ERROR during mapstructure scraper decode[1]:", err)
+			}
+			c.Setting.ClokiWriter.PROMETHEUS_SCRAPE = append(c.Setting.ClokiWriter.PROMETHEUS_SCRAPE, data)
 		}
 	}
 
