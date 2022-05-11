@@ -41,11 +41,10 @@ type KafkaConf struct {
 }
 
 type PrometheusScrape struct {
-	Endpoint       string `json:"endpoint" mapstructure:"endpoint" default:"https://user:password@127.0.0.1:9099/metrics"`
-	ScrapeInterval string `json:"scrape_interval" mapstructure:"scrape_interval" default:"60s"`
-	InstanceTag    string `json:"instance_tag" mapstructure:"instance_tag" default:"instance"`
-	EndpointTag    string `json:"endpoint_tag" mapstructure:"endpoint_tag" default:"endpoint"`
-	Enable         bool   `json:"enable" mapstructure:"enable" default:"false"`
+	Endpoint    string `json:"endpoint" mapstructure:"endpoint" default:"https://user:password@127.0.0.1:9099/metrics"`
+	InstanceTag string `json:"instance_tag" mapstructure:"instance_tag" default:"instance"`
+	EndpointTag string `json:"endpoint_tag" mapstructure:"endpoint_tag" default:"endpoint"`
+	Enable      bool   `json:"enable" mapstructure:"enable" default:"false"`
 }
 
 //
@@ -66,5 +65,6 @@ type ClokiWriterSettingServer struct {
 		User     string `json:"user" mapstructure:"user" default:""`
 		Password string `json:"password" mapstructure:"password" default:""`
 	} `json:"nats" mapstructure:"nats"`
-	PROMETHEUS_SCRAPE []PrometheusScrape `json:"prometheus_scrape" mapstructure:"prometheus_scrape"`
+	PROMETHEUS_SCRAPE        []PrometheusScrape `json:"prometheus_scrape" mapstructure:"prometheus_scrape"`
+	PrometheusScrapeInterval string             `json:"prometheus_scrape_interval" mapstructure:"prometheus_scrape_interval" default:"15s"`
 }
