@@ -61,6 +61,10 @@ type ClokiBaseSettingServer struct {
 		CPUMaxProcs          int     `json:"cpu_max_procs" mapstructure:"cpu_max_procs" default:"1"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
+	MULTITENANCE_SETTINGS struct {
+		enabled bool `json:"enabled" mapstructure:"enabled" default:"false"`
+	} `json:"multitenance_settings" mapstructure:"multitenance_settings"`
+
 	AUTH_SETTINGS struct {
 		AuthTokenHeader string `json:"token_header" mapstructure:"token_header" default:"Auth-Token"`
 		AuthTokenExpire uint32 `json:"token_expire" mapstructure:"token_expire" default:"1200"`
