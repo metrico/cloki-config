@@ -38,6 +38,8 @@ type KafkaConf struct {
 	Password string         `json:"password" mapstructure:"password" default:""`
 	Topic    KafkaTopicConf `json:"topic" mapstructure:"topic" default:""`
 	GroupID  string         `json:"consumer_group" mapstructure:"consumer_group" default:""`
+	// org id to write into DB
+	OrgID string `json:"org_id" mapstructure:"org_id" default:"0"`
 }
 
 type PrometheusScrape struct {
@@ -45,6 +47,8 @@ type PrometheusScrape struct {
 	InstanceTag string `json:"instance_tag" mapstructure:"instance_tag" default:"instance"`
 	EndpointTag string `json:"endpoint_tag" mapstructure:"endpoint_tag" default:"endpoint"`
 	Enable      bool   `json:"enable" mapstructure:"enable" default:"false"`
+	// org id to write into DB
+	OrgID string `json:"org_id" mapstructure:"org_id" default:"0"`
 }
 
 //
@@ -56,6 +60,8 @@ type ClokiWriterSettingServer struct {
 		User       string        `json:"user" mapstructure:"user" default:""`
 		Password   string        `json:"password" mapstructure:"password" default:""`
 		Topic      MQTTTopicConf `json:"topic" mapstructure:"topic" default:""`
+		// org id to write into DB
+		OrgID string `json:"org_id" mapstructure:"org_id" default:"0"`
 	} `json:"mqtt" mapstructure:"mqtt"`
 	KAFKA_CLIENT KafkaConf `json:"kafka" mapstructure:"kafka" default:""`
 	NATS         struct {
