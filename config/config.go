@@ -62,7 +62,7 @@ type ClokiBaseSettingServer struct {
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	MULTITENANCE_SETTINGS struct {
-		enabled bool `json:"enabled" mapstructure:"enabled" default:"false"`
+		Enabled bool `json:"enabled" mapstructure:"enabled" default:"false"`
 	} `json:"multitenance_settings" mapstructure:"multitenance_settings"`
 
 	AUTH_SETTINGS struct {
