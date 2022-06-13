@@ -30,6 +30,7 @@ type ClokiBaseDataBase struct {
 	StoragePolicy string `json:"storage_policy" mapstructure:"storage_policy" default:""`
 	Secure        bool   `json:"secure" mapstructure:"secure" default:"false"`
 	Cloud         bool   `json:"cloud" mapstructure:"cloud" default:"false"`
+	ClusterName   string `json:"cluster_name" mapstructure:"cluster_name" default:""`
 }
 
 type ClokiBaseSettingServer struct {
