@@ -15,9 +15,9 @@ type ClokiBaseDataBase struct {
 	Password      string `json:"pass" mapstructure:"pass" default:"cloki_pass"`
 	Name          string `json:"name" mapstructure:"name" default:"cloki_data"`
 	Host          string `json:"host" mapstructure:"host" default:"127.0.0.1"`
-	TableSamples  string `json:"table_samples" mapstructure:"table_samples" default:"samples_v4"`
-	TableSeries   string `json:"table_series" mapstructure:"table_series" default:"time_series_v2"`
-	TableMetrics  string `json:"table_metrics" mapstructure:"table_metrics" default:"samples_v4"`
+	TableSamples  string `json:"table_samples" mapstructure:"table_samples" default:""`
+	TableSeries   string `json:"table_series" mapstructure:"table_series" default:""`
+	TableMetrics  string `json:"table_metrics" mapstructure:"table_metrics" default:""`
 	Debug         bool   `json:"debug" mapstructure:"debug" default:"false"`
 	Port          uint32 `json:"port" mapstructure:"port" default:"9000"`
 	ReadTimeout   uint32 `json:"read_timeout" mapstructure:"read_timeout" default:"30"`

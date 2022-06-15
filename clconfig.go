@@ -218,6 +218,31 @@ func (c *ClokiConfig) ReadConfig() {
 
 	//viper.Debug()
 	c.setFastConfigSettings()
+
+	// default table names setting
+	for i, node := range c.Setting.DATABASE_DATA {
+		if node.TableSeries == "" {
+			if node.ClusterName == "" {
+				c.Setting.DATABASE_DATA[i].TableSeries = "time_series_v2"
+			} else {
+				c.Setting.DATABASE_DATA[i].TableSeries = "time_series_v2_dist"
+			}
+		}
+		if node.TableSamples == "" {
+			if node.ClusterName == "" {
+				c.Setting.DATABASE_DATA[i].TableSamples = "samples_v4"
+			} else {
+				c.Setting.DATABASE_DATA[i].TableSamples = "samples_v4_dist"
+			}
+		}
+		if node.TableMetrics == "" {
+			if node.ClusterName == "" {
+				c.Setting.DATABASE_DATA[i].TableMetrics = "samples_v4"
+			} else {
+				c.Setting.DATABASE_DATA[i].TableMetrics = "samples_v4_dist"
+			}
+		}
+	}
 	//c.Setting = &c.Setting
 }
 
