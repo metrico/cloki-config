@@ -33,11 +33,11 @@ type KafkaConf struct {
 	Host string `json:"host" mapstructure:"host" default:""`
 	Port int    `json:"port" mapstructure:"port" default:"0"`
 	// SASL auth type:  Plain/Scram
-	AuthType string         `json:"auth_type" mapstructure:"auth_type" default:""`
-	Username string         `json:"username" mapstructure:"username" default:""`
-	Password string         `json:"password" mapstructure:"password" default:""`
-	Topic    KafkaTopicConf `json:"topic" mapstructure:"topic" default:""`
-	GroupID  string         `json:"consumer_group" mapstructure:"consumer_group" default:""`
+	AuthType string           `json:"auth_type" mapstructure:"auth_type" default:""`
+	Username string           `json:"username" mapstructure:"username" default:""`
+	Password string           `json:"password" mapstructure:"password" default:""`
+	Topic    []KafkaTopicConf `json:"topic" mapstructure:"topic" default:""`
+	GroupID  string           `json:"consumer_group" mapstructure:"consumer_group" default:""`
 	// org id to write into DB
 	OrgID string `json:"org_id" mapstructure:"org_id" default:"0"`
 }
@@ -63,7 +63,7 @@ type ClokiWriterSettingServer struct {
 		// org id to write into DB
 		OrgID string `json:"org_id" mapstructure:"org_id" default:"0"`
 	} `json:"mqtt" mapstructure:"mqtt"`
-	KAFKA_CLIENT KafkaConf `json:"kafka" mapstructure:"kafka" default:""`
+	KAFKA_CLIENT []KafkaConf `json:"kafka" mapstructure:"kafka" default:""`
 	NATS         struct {
 		External string `json:"external" mapstructure:"external" default:""`
 		Bind     string `json:"bind" mapstructure:"bind" default:"0.0.0.0"`
