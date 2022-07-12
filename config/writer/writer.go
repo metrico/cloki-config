@@ -27,6 +27,7 @@ type KafkaTopicConf struct {
 	Format    string     `json:"format" mapstructure:"format" default:""`
 	Extract   [][]string `json:"extract" mapstructure:"extract" default:"[]"`
 	Partition int        `json:"partition" mapstructure:"partition" default:"0"`
+	Type      string     `json:"type" mapstructure:"type" default:""`
 }
 
 type KafkaConf struct {
