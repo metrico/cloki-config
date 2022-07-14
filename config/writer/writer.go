@@ -24,10 +24,11 @@ type KafkaTopicConf struct {
 	IncludeHeaders bool              `json:"include_headers" mapstructure:"include_headers" default:"true"`
 	IncludeKey     bool              `json:"include_key" mapstructure:"include_key" default:"true"`
 	// json or empty
-	Format    string     `json:"format" mapstructure:"format" default:""`
-	Extract   [][]string `json:"extract" mapstructure:"extract" default:"[]"`
-	Partition int        `json:"partition" mapstructure:"partition" default:"0"`
-	Type      string     `json:"type" mapstructure:"type" default:""`
+	Format       string     `json:"format" mapstructure:"format" default:""`
+	Extract      [][]string `json:"extract" mapstructure:"extract" default:"[]"`
+	ExtractValue []string   `json:"extract_value" mapstructure:"extract_value" default:"[]"`
+	Partition    int        `json:"partition" mapstructure:"partition" default:"0"`
+	Type         string     `json:"type" mapstructure:"type" default:""`
 }
 
 type KafkaConf struct {
