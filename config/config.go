@@ -54,13 +54,13 @@ type ClokiBaseSettingServer struct {
 		EnableUserAuditLogin bool    `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
 		UUID                 string  `json:"uuid" mapstructure:"uuid" default:""`
 		DBBulk               int     `json:"db_bulk" mapstructure:"db_bulk" default:"40000"`
-		DBTimer              float64 `json:"db_timer" mapstructure:"db_timer" default:"1"`
+		DBTimer              float64 `json:"db_timer" mapstructure:"db_timer" default:"0.1"`
 		BufferSizeSample     uint32  `json:"buffer_size_sample" mapstructure:"buffer_size_sample" default:"200000"`
 		BufferSizeTimeSeries uint32  `json:"buffer_size_timeseries" mapstructure:"buffer_size_timeseries" default:"200000"`
-		ChannelsSample       int     `json:"channels_sample" mapstructure:"channels_sample" default:"3"`
-		ChannelsTimeSeries   int     `json:"channels_timeseries" mapstructure:"channels_timeseries" default:"5"`
+		ChannelsSample       int     `json:"channels_sample" mapstructure:"channels_sample" default:"2"`
+		ChannelsTimeSeries   int     `json:"channels_timeseries" mapstructure:"channels_timeseries" default:"2"`
 		HashType             string  `json:"hash_type" mapstructure:"hash_type" default:""`
-		CPUMaxProcs          int     `json:"cpu_max_procs" mapstructure:"cpu_max_procs" default:"1"`
+		CPUMaxProcs          int     `json:"cpu_max_procs" mapstructure:"cpu_max_procs" default:"0"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	MULTITENANCE_SETTINGS struct {
