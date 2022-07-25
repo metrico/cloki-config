@@ -54,7 +54,7 @@ type ClokiBaseSettingServer struct {
 		EnableUserAuditLogin bool    `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
 		UUID                 string  `json:"uuid" mapstructure:"uuid" default:""`
 		DBBulk               int     `json:"db_bulk" mapstructure:"db_bulk" default:"40000"`
-		DBTimer              float64 `json:"db_timer" mapstructure:"db_timer" default:"0.1"`
+		DBTimer              float64 `json:"db_timer" mapstructure:"db_timer" default:"0.2"`
 		BufferSizeSample     uint32  `json:"buffer_size_sample" mapstructure:"buffer_size_sample" default:"200000"`
 		BufferSizeTimeSeries uint32  `json:"buffer_size_timeseries" mapstructure:"buffer_size_timeseries" default:"200000"`
 		ChannelsSample       int     `json:"channels_sample" mapstructure:"channels_sample" default:"2"`
