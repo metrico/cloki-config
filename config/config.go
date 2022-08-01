@@ -39,7 +39,7 @@ type ClokiBaseSettingServer struct {
 
 	//Base
 	SrartTime                time.Time `default:""`
-	FingerPrintType          uint      `default:"0"`
+	FingerPrintType          uint      `default:"1"`
 	DataBaseStrategy         uint      `default:"0"`
 	CurrentDataBaseIndex     uint      `default:"0"`
 	DataDatabaseGroupNodeMap map[string][]string
