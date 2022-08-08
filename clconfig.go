@@ -139,16 +139,16 @@ func (c *ClokiConfig) ReadConfig() {
 		val := value.(map[string]interface{})
 		//If the configuration already exists - we replace only existing params
 		if len(c.Setting.DATABASE_DATA) > idx {
-			err := mapstructure.Decode(val, &c.Setting.DATABASE_DATA[idx])
+			err := mapstructure.WeakDecode(val, &c.Setting.DATABASE_DATA[idx])
 			if err != nil {
-				fmt.Println("ERROR during mapstructure decode[0]:", err)
+				fmt.Println("ERROR during mapstructure decode[0] sort:", err)
 			}
 		} else {
 			data := config.ClokiBaseDataBase{}
 			defaults.SetDefaults(&data) //<-- This set the defaults values
-			err := mapstructure.Decode(val, &data)
+			err := mapstructure.WeakDecode(val, &data)
 			if err != nil {
-				fmt.Println("ERROR during mapstructure decode[1]:", err)
+				fmt.Println("ERROR during mapstructure decode[1] sort:", err)
 			}
 			c.Setting.DATABASE_DATA = append(c.Setting.DATABASE_DATA, data)
 		}
@@ -192,14 +192,14 @@ func (c *ClokiConfig) ReadConfig() {
 		val := value.(map[string]interface{})
 		//If the configuration already exists - we replace only existing params
 		if len(c.Setting.ClokiWriter.PROMETHEUS_SCRAPE) > idx {
-			err := mapstructure.Decode(val, &c.Setting.ClokiWriter.PROMETHEUS_SCRAPE[idx])
+			err := mapstructure.WeakDecode(val, &c.Setting.ClokiWriter.PROMETHEUS_SCRAPE[idx])
 			if err != nil {
 				fmt.Println("ERROR during mapstructure scraper decode[0]:", err)
 			}
 		} else {
 			data := writer.PrometheusScrape{}
 			defaults.SetDefaults(&data) //<-- This set the defaults values
-			err := mapstructure.Decode(val, &data)
+			err := mapstructure.WeakDecode(val, &data)
 			if err != nil {
 				fmt.Println("ERROR during mapstructure scraper decode[1]:", err)
 			}

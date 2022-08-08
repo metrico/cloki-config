@@ -19,9 +19,9 @@ type ClokiBaseDataBase struct {
 	TableSeries   string `json:"table_series" mapstructure:"table_series" default:""`
 	TableMetrics  string `json:"table_metrics" mapstructure:"table_metrics" default:""`
 	Debug         bool   `json:"debug" mapstructure:"debug" default:"false"`
-	Port          int    `json:"port" mapstructure:"port" default:"9000"`
-	ReadTimeout   int    `json:"read_timeout" mapstructure:"read_timeout" default:"30"`
-	WriteTimeout  int    `json:"write_timeout" mapstructure:"write_timeout" default:"30"`
+	Port          uint32 `json:"port" mapstructure:"port" default:"9000"`
+	ReadTimeout   uint32 `json:"read_timeout" mapstructure:"read_timeout" default:"30"`
+	WriteTimeout  uint32 `json:"write_timeout" mapstructure:"write_timeout" default:"30"`
 	MaxIdleConn   int    `json:"max_idle_connection" mapstructure:"max_idle_connection" default:"5"`
 	MaxOpenConn   int    `json:"max_open_connection" mapstructure:"max_open_connection" default:"50"`
 	Primary       bool   `json:"primary" mapstructure:"primary" default:"false"`
