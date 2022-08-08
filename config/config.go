@@ -44,7 +44,7 @@ type ClokiBaseSettingServer struct {
 	CurrentDataBaseIndex     uint      `default:"0"`
 	DataDatabaseGroupNodeMap map[string][]string
 	Validate                 *validator.Validate
-	EnvPrefix                string `default:"CLOKI"`
+	EnvPrefix                string `default:"QRYN"`
 	PluginsPath              string `default:""`
 
 	DATABASE_DATA []ClokiBaseDataBase `json:"database_data" mapstructure:"database_data"`
