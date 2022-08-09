@@ -31,6 +31,7 @@ type ClokiBaseDataBase struct {
 	Secure        bool   `json:"secure" mapstructure:"secure" default:"false"`
 	Cloud         bool   `json:"cloud" mapstructure:"cloud" default:"false"`
 	ClusterName   string `json:"cluster_name" mapstructure:"cluster_name" default:""`
+	AsyncInsert   bool   `json:"async_insert" mapstructure:"async_insert" default:"false"`
 }
 
 type ClokiBaseSettingServer struct {
