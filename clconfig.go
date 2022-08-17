@@ -36,17 +36,14 @@ const (
 	CLOKI_READER
 )
 
-func New(typeCloki CLOKI_TYPE, configPath string, mergePaths []string, logName, logPath string) *ClokiConfig {
+func New(typeCloki CLOKI_TYPE, configPaths []string, logName, logPath string) *ClokiConfig {
 
 	c := new(ClokiConfig)
 
 	c.Setting = new(config.ClokiBaseSettingServer)
 	defaults.SetDefaults(c.Setting) //<-- This set the defaults values
 
-	c.configPaths = []string{configPath}
-	for _, p := range mergePaths {
-		c.configPaths = append(c.configPaths, p)
-	}
+	c.configPaths = configPaths
 	c.logPath = logPath
 
 	//Type
