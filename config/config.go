@@ -130,4 +130,8 @@ type ClokiBaseSettingServer struct {
 		Enable       bool     `json:"enable" mapstructure:"enable" default:"false"`
 		AllowIP      []string `json:"allow_ip" mapstructure:"allow_ip" default:"[127.0.0.1]"`
 	} `json:"prometheus_client" mapstructure:"prometheus_client"`
+
+	LICENSE_SETTINGS struct {
+		RemoteCheckInterval string `json:"remote_check_interval" mapstructure:"remote_check_interval" default:"90d"`
+	} `json:"license_settings" mapstructure:"license_settings"`
 }
