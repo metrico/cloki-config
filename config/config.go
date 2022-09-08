@@ -107,17 +107,18 @@ type ClokiBaseSettingServer struct {
 	} `json:"https_settings" mapstructure:"https_settings"`
 
 	LOG_SETTINGS struct {
-		Enable        bool   `json:"enable" mapstructure:"enable" default:"true"`
-		MaxAgeDays    uint32 `json:"max_age_days" mapstructure:"max_age_days" default:"7"`
-		RotationHours uint32 `json:"rotation_hours" mapstructure:"rotation_hours" default:"24"`
-		Path          string `json:"path" mapstructure:"path" default:"./"`
-		Level         string `json:"level" mapstructure:"level" default:"error"`
-		Name          string `json:"name" mapstructure:"name" default:"ClokiBase.log"`
-		Stdout        bool   `json:"stdout" mapstructure:"stdout" default:"false"`
-		Json          bool   `json:"json" mapstructure:"json" default:"true"`
-		SysLogLevel   string `json:"syslog_level" mapstructure:"syslog_level" default:"LOG_INFO"`
-		SysLog        bool   `json:"syslog" mapstructure:"syslog" default:"false"`
-		SyslogUri     string `json:"syslog_uri" mapstructure:"syslog_uri" default:""`
+		Enable          bool   `json:"enable" mapstructure:"enable" default:"true"`
+		MaxAgeDays      uint32 `json:"max_age_days" mapstructure:"max_age_days" default:"7"`
+		RotationHours   uint32 `json:"rotation_hours" mapstructure:"rotation_hours" default:"24"`
+		Path            string `json:"path" mapstructure:"path" default:"./"`
+		Level           string `json:"level" mapstructure:"level" default:"error"`
+		Name            string `json:"name" mapstructure:"name" default:"ClokiBase.log"`
+		Stdout          bool   `json:"stdout" mapstructure:"stdout" default:"false"`
+		Json            bool   `json:"json" mapstructure:"json" default:"true"`
+		SysLogLevel     string `json:"syslog_level" mapstructure:"syslog_level" default:"LOG_INFO"`
+		SysLog          bool   `json:"syslog" mapstructure:"syslog" default:"false"`
+		SyslogUri       string `json:"syslog_uri" mapstructure:"syslog_uri" default:""`
+		InternalTracing bool   `json:"internal_tracing" mapstructure:"internal_tracing" default:"false"`
 	} `json:"log_settings" mapstructure:"log_settings"`
 
 	PROMETHEUS_CLIENT struct {
