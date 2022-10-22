@@ -10,28 +10,30 @@ import (
 
 // ============================ BASE ONLY ================================= //
 type ClokiBaseDataBase struct {
-	User          string `json:"user" mapstructure:"user" default:"cloki_user"`
-	Node          string `json:"node" mapstructure:"node" default:"clokinode"`
-	Password      string `json:"pass" mapstructure:"pass" default:"cloki_pass"`
-	Name          string `json:"name" mapstructure:"name" default:"cloki_data"`
-	Host          string `json:"host" mapstructure:"host" default:"127.0.0.1"`
-	TableSamples  string `json:"table_samples" mapstructure:"table_samples" default:""`
-	TableSeries   string `json:"table_series" mapstructure:"table_series" default:""`
-	TableMetrics  string `json:"table_metrics" mapstructure:"table_metrics" default:""`
-	Debug         bool   `json:"debug" mapstructure:"debug" default:"false"`
-	Port          uint32 `json:"port" mapstructure:"port" default:"9000"`
-	ReadTimeout   uint32 `json:"read_timeout" mapstructure:"read_timeout" default:"30"`
-	WriteTimeout  uint32 `json:"write_timeout" mapstructure:"write_timeout" default:"30"`
-	MaxIdleConn   int    `json:"max_idle_connection" mapstructure:"max_idle_connection" default:"5"`
-	MaxOpenConn   int    `json:"max_open_connection" mapstructure:"max_open_connection" default:"50"`
-	Primary       bool   `json:"primary" mapstructure:"primary" default:"false"`
-	Strategy      string `json:"strategy" mapstructure:"strategy" default:"failover"`
-	TTLDays       int    `json:"ttl_days" mapstructure:"ttl_days" default:"7"`
-	StoragePolicy string `json:"storage_policy" mapstructure:"storage_policy" default:""`
-	Secure        bool   `json:"secure" mapstructure:"secure" default:"false"`
-	Cloud         bool   `json:"cloud" mapstructure:"cloud" default:"false"`
-	ClusterName   string `json:"cluster_name" mapstructure:"cluster_name" default:""`
-	AsyncInsert   bool   `json:"async_insert" mapstructure:"async_insert" default:"false"`
+	User                   string `json:"user" mapstructure:"user" default:"cloki_user"`
+	Node                   string `json:"node" mapstructure:"node" default:"clokinode"`
+	Password               string `json:"pass" mapstructure:"pass" default:"cloki_pass"`
+	Name                   string `json:"name" mapstructure:"name" default:"cloki_data"`
+	Host                   string `json:"host" mapstructure:"host" default:"127.0.0.1"`
+	TableSamples           string `json:"table_samples" mapstructure:"table_samples" default:""`
+	TableSeries            string `json:"table_series" mapstructure:"table_series" default:""`
+	TableMetrics           string `json:"table_metrics" mapstructure:"table_metrics" default:""`
+	Debug                  bool   `json:"debug" mapstructure:"debug" default:"false"`
+	Port                   uint32 `json:"port" mapstructure:"port" default:"9000"`
+	ReadTimeout            uint32 `json:"read_timeout" mapstructure:"read_timeout" default:"30"`
+	WriteTimeout           uint32 `json:"write_timeout" mapstructure:"write_timeout" default:"30"`
+	MaxIdleConn            int    `json:"max_idle_connection" mapstructure:"max_idle_connection" default:"5"`
+	MaxOpenConn            int    `json:"max_open_connection" mapstructure:"max_open_connection" default:"50"`
+	Primary                bool   `json:"primary" mapstructure:"primary" default:"false"`
+	Strategy               string `json:"strategy" mapstructure:"strategy" default:"failover"`
+	TTLDays                int    `json:"ttl_days" mapstructure:"ttl_days" default:"7"`
+	StoragePolicy          string `json:"storage_policy" mapstructure:"storage_policy" default:""`
+	Secure                 bool   `json:"secure" mapstructure:"secure" default:"false"`
+	Cloud                  bool   `json:"cloud" mapstructure:"cloud" default:"false"`
+	ClusterName            string `json:"cluster_name" mapstructure:"cluster_name" default:""`
+	AsyncInsert            bool   `json:"async_insert" mapstructure:"async_insert" default:"false"`
+	EmergencySweepLimit    string `json:"emergency_sweep_limit" mapstructure:"emergency_sweep_limit" default:""`
+	EmergencySweepAdvanced string `json:"emergency_sweep_advanced" mapstructure:"emergency_sweep_advanced" default:""`
 }
 
 type ClokiBaseSettingServer struct {
