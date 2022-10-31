@@ -35,6 +35,8 @@ type ClokiBaseDataBase struct {
 	EmergencySweepLimit    string `json:"emergency_sweep_limit" mapstructure:"emergency_sweep_limit" default:""`
 	EmergencySweepAdvanced string `json:"emergency_sweep_advanced" mapstructure:"emergency_sweep_advanced" default:""`
 	TextCodec              string `json:"text_codec" mapstructure:"text_codec" default:""`
+	LogsIndex              string `json:"logs_index" mapstructure:"logs_index" default:""`
+	LogsIndexGranularity   uint32 `json:"logs_index_granularity" mapstructure:"logs_index_granularity" default:""`
 }
 
 type ClokiBaseSettingServer struct {
