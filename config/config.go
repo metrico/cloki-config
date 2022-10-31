@@ -34,6 +34,7 @@ type ClokiBaseDataBase struct {
 	AsyncInsert            bool   `json:"async_insert" mapstructure:"async_insert" default:"false"`
 	EmergencySweepLimit    string `json:"emergency_sweep_limit" mapstructure:"emergency_sweep_limit" default:""`
 	EmergencySweepAdvanced string `json:"emergency_sweep_advanced" mapstructure:"emergency_sweep_advanced" default:""`
+	TextCodec              string `json:"text_codec" mapstructure:"text_codec" default:""`
 }
 
 type ClokiBaseSettingServer struct {
