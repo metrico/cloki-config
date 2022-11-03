@@ -86,7 +86,7 @@ type ClokiBaseSettingServer struct {
 	SCRIPT_SETTINGS struct {
 		Enable bool   `json:"enable" mapstructure:"enable" default:"false"`
 		Engine string `json:"engine" mapstructure:"engine" default:"lua"`
-		Folder string `json:"folder" mapstructure:"folder" default:"/usr/local/qryn/scripts"`
+		Folder string `json:"folder" mapstructure:"folder" default:"/usr/local/qryn/scripts/"`
 	} `json:"script_settings" mapstructure:"script_settings"`
 
 	HTTP_SETTINGS struct {
