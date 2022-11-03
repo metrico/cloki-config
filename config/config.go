@@ -83,6 +83,12 @@ type ClokiBaseSettingServer struct {
 		EnableTokenAccess bool `json:"enable_token_access" mapstructure:"enable_token_access" default:"true"`
 	} `json:"api_settings" mapstructure:"api_settings"`
 
+	SCRIPT_SETTINGS struct {
+		Enable bool   `json:"enable" mapstructure:"enable" default:"false"`
+		Engine string `json:"engine" mapstructure:"engine" default:"lua"`
+		Folder string `json:"folder" mapstructure:"folder" default:"/usr/local/qryn/scripts"`
+	} `json:"script_settings" mapstructure:"script_settings"`
+
 	HTTP_SETTINGS struct {
 		Host          string `json:"host" mapstructure:"host" default:"0.0.0.0"`
 		Port          int    `json:"port" mapstructure:"port" default:"3200"`
