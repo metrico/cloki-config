@@ -83,6 +83,12 @@ type ClokiBaseSettingServer struct {
 		EnableTokenAccess bool `json:"enable_token_access" mapstructure:"enable_token_access" default:"true"`
 	} `json:"api_settings" mapstructure:"api_settings"`
 
+	FORWARD_SETTINGS struct {
+		ForwardUrl     string `json:"forward_url" mapstructure:"forward_url" default:""`
+		ForwardLabels  string `json:"forward_labels" mapstructure:"forward_labels" default:""`
+		ForwardHeaders string `json:"forward_headers" mapstructure:"forward_headers" default:""`
+	}
+
 	HTTP_SETTINGS struct {
 		Host          string `json:"host" mapstructure:"host" default:"0.0.0.0"`
 		Port          int    `json:"port" mapstructure:"port" default:"3200"`
