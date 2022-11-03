@@ -87,7 +87,7 @@ type ClokiBaseSettingServer struct {
 		ForwardUrl     string `json:"forward_url" mapstructure:"forward_url" default:""`
 		ForwardLabels  string `json:"forward_labels" mapstructure:"forward_labels" default:""`
 		ForwardHeaders string `json:"forward_headers" mapstructure:"forward_headers" default:""`
-	}
+	} `json:"forward_settings" mapstructure:"forward_settings"`
 
 	HTTP_SETTINGS struct {
 		Host          string `json:"host" mapstructure:"host" default:"0.0.0.0"`
