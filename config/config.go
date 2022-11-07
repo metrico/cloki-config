@@ -89,6 +89,12 @@ type ClokiBaseSettingServer struct {
 		Folder string `json:"folder" mapstructure:"folder" default:"/usr/local/qryn/scripts/"`
 	} `json:"script_settings" mapstructure:"script_settings"`
 
+	FORWARD_SETTINGS struct {
+		ForwardUrl     string `json:"forward_url" mapstructure:"forward_url" default:""`
+		ForwardLabels  string `json:"forward_labels" mapstructure:"forward_labels" default:""`
+		ForwardHeaders string `json:"forward_headers" mapstructure:"forward_headers" default:""`
+	} `json:"forward_settings" mapstructure:"forward_settings"`
+
 	HTTP_SETTINGS struct {
 		Host          string `json:"host" mapstructure:"host" default:"0.0.0.0"`
 		Port          int    `json:"port" mapstructure:"port" default:"3200"`
@@ -98,7 +104,11 @@ type ClokiBaseSettingServer struct {
 		Gzip          bool   `json:"gzip" mapstructure:"gzip" default:"true"`
 		GzipStatic    bool   `json:"gzip_static" mapstructure:"gzip_static" default:"true"`
 		Debug         bool   `json:"debug" mapstructure:"debug" default:"false"`
-		WebSocket     struct {
+		Cors          struct {
+			Origin string `json:"origin" mapstructure:"origin" default:"*"`
+			Enable bool   `json:"enable" mapstructure:"enable" default:"false"`
+		} `json:"cors" mapstructure:"cors"`
+		WebSocket struct {
 			Enable bool `json:"enable" mapstructure:"enable" default:"false"`
 		} `json:"websocket" mapstructure:"websocket"`
 		Enable bool `json:"enable" mapstructure:"enable" default:"true"`
