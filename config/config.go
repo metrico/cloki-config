@@ -83,6 +83,12 @@ type ClokiBaseSettingServer struct {
 		EnableTokenAccess bool `json:"enable_token_access" mapstructure:"enable_token_access" default:"true"`
 	} `json:"api_settings" mapstructure:"api_settings"`
 
+	SCRIPT_SETTINGS struct {
+		Enable bool   `json:"enable" mapstructure:"enable" default:"false"`
+		Engine string `json:"engine" mapstructure:"engine" default:"lua"`
+		Folder string `json:"folder" mapstructure:"folder" default:"/usr/local/qryn/scripts/"`
+	} `json:"script_settings" mapstructure:"script_settings"`
+
 	FORWARD_SETTINGS struct {
 		ForwardUrl     string `json:"forward_url" mapstructure:"forward_url" default:""`
 		ForwardLabels  string `json:"forward_labels" mapstructure:"forward_labels" default:""`
