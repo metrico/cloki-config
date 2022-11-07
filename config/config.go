@@ -98,7 +98,11 @@ type ClokiBaseSettingServer struct {
 		Gzip          bool   `json:"gzip" mapstructure:"gzip" default:"true"`
 		GzipStatic    bool   `json:"gzip_static" mapstructure:"gzip_static" default:"true"`
 		Debug         bool   `json:"debug" mapstructure:"debug" default:"false"`
-		WebSocket     struct {
+		Cors          struct {
+			Origin string `json:"origin" mapstructure:"origin" default:"*"`
+			Enable bool   `json:"enable" mapstructure:"enable" default:"false"`
+		} `json:"cors" mapstructure:"cors"`
+		WebSocket struct {
 			Enable bool `json:"enable" mapstructure:"enable" default:"false"`
 		} `json:"websocket" mapstructure:"websocket"`
 		Enable bool `json:"enable" mapstructure:"enable" default:"true"`
