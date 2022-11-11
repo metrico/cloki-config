@@ -56,7 +56,7 @@ type ClokiBaseSettingServer struct {
 	DATABASE_DATA []ClokiBaseDataBase `json:"database_data" mapstructure:"database_data"`
 
 	CLUSTER_SETTINGS struct {
-		Distribution string `json:"distribution" mapstructure:"distribution" default:"{{.fingerprint}}"`
+		DistributionHeader bool `json:"distribution_header" mapstructure:"distribution_header" default:"false"`
 	} `json:"cluster_settings" mapstructure:"cluster_settings"`
 
 	SYSTEM_SETTINGS struct {
