@@ -55,6 +55,10 @@ type ClokiBaseSettingServer struct {
 
 	DATABASE_DATA []ClokiBaseDataBase `json:"database_data" mapstructure:"database_data"`
 
+	CLUSTER_SETTINGS struct {
+		Distribution string `json:"distribution" mapstructure:"distribution" default:"{{.fingerprint}}"`
+	} `json:"cluster_settings" mapstructure:"cluster_settings"`
+
 	SYSTEM_SETTINGS struct {
 		HostName             string  `json:"hostname" mapstructure:"hostname" default:"hostname"`
 		EnableUserAuditLogin bool    `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
