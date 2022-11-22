@@ -159,6 +159,7 @@ type ClokiBaseSettingServer struct {
 	} `json:"prometheus_client" mapstructure:"prometheus_client"`
 
 	LICENSE_SETTINGS struct {
+		ProxyServer              string `json:"proxy_server" mapstructure:"proxy_server" default:""`
 		RemoteCheckInterval      string `json:"remote_check_interval" mapstructure:"remote_check_interval" default:"90d"`
 		GracePeriodCheckInterval string `json:"grace_check_interval" mapstructure:"grace_check_interval" default:"14d"`
 	} `json:"license_settings" mapstructure:"license_settings"`
