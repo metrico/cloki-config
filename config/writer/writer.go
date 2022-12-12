@@ -75,4 +75,5 @@ type ClokiWriterSettingServer struct {
 	} `json:"nats" mapstructure:"nats"`
 	PROMETHEUS_SCRAPE        []PrometheusScrape `json:"prometheus_scrape" mapstructure:"prometheus_scrape"`
 	PrometheusScrapeInterval string             `json:"prometheus_scrape_interval" mapstructure:"prometheus_scrape_interval" default:"15s"`
+	WriteStats               bool               `json:"write_stats" mapstructure:"write_stats" default:"false"`
 }
