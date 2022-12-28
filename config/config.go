@@ -38,6 +38,7 @@ type ClokiBaseDataBase struct {
 	TextCodec              string `json:"text_codec" mapstructure:"text_codec" default:""`
 	LogsIndex              string `json:"logs_index" mapstructure:"logs_index" default:""`
 	LogsIndexGranularity   uint32 `json:"logs_index_granularity" mapstructure:"logs_index_granularity" default:""`
+	DistributedClusterName string `json:"distributed_cluster_name" mapstructure:"distributed_cluster_name" default:""`
 }
 
 type ClokiBaseSettingServer struct {
