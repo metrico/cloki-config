@@ -75,6 +75,7 @@ type ClokiBaseSettingServer struct {
 		CPUMaxProcs          int     `json:"cpu_max_procs" mapstructure:"cpu_max_procs" default:"0"`
 		NoForceRotation      bool    `json:"no_force_rotation" mapstructure:"no_force_rotation" default:"false"`
 		QueryStats           bool    `json:"query_stats" mapstructure:"query_stats" default:"false"`
+		DynamicDatabases     bool    `json:"dynamic_databases" mapstructure:"dynamic_databases" default:"false"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	MULTITENANCE_SETTINGS struct {
