@@ -119,7 +119,8 @@ type ClokiBaseSettingServer struct {
 		WebSocket struct {
 			Enable bool `json:"enable" mapstructure:"enable" default:"false"`
 		} `json:"websocket" mapstructure:"websocket"`
-		Enable bool `json:"enable" mapstructure:"enable" default:"true"`
+		Enable        bool `json:"enable" mapstructure:"enable" default:"true"`
+		InputBufferMB int  `json:"input_buffer_mb" mapstructure:"input_buffer_mb" default:"200"`
 	} `json:"http_settings" mapstructure:"http_settings"`
 
 	HTTPS_SETTINGS struct {
