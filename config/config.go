@@ -142,7 +142,7 @@ type ClokiBaseSettingServer struct {
 		MaxAgeDays      uint32 `json:"max_age_days" mapstructure:"max_age_days" default:"7"`
 		RotationHours   uint32 `json:"rotation_hours" mapstructure:"rotation_hours" default:"24"`
 		Path            string `json:"path" mapstructure:"path" default:"./"`
-		Level           string `json:"level" mapstructure:"level" default:"error"`
+		Level           string `json:"level" mapstructure:"level" default:"info"`
 		Name            string `json:"name" mapstructure:"name" default:"ClokiBase.log"`
 		Stdout          bool   `json:"stdout" mapstructure:"stdout" default:"false"`
 		Json            bool   `json:"json" mapstructure:"json" default:"true"`
