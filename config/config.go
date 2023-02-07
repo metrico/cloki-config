@@ -151,6 +151,11 @@ type ClokiBaseSettingServer struct {
 		SysLog          bool   `json:"syslog" mapstructure:"syslog" default:"false"`
 		SyslogUri       string `json:"syslog_uri" mapstructure:"syslog_uri" default:""`
 		InternalTracing bool   `json:"internal_tracing" mapstructure:"internal_tracing" default:"false"`
+		Qryn            struct {
+			Url         string `json:"url" mapstructure:"url" default:""`
+			App         string `json:"app" mapstructure:"app" default:""`
+			AddHostname bool   `json:"add_hostname" mapstructure:"add_hostname" default:"false"`
+		} `json:"qryn" mapstructure:"qryn"`
 	} `json:"log_settings" mapstructure:"log_settings"`
 
 	PROMETHEUS_CLIENT struct {
