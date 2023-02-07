@@ -155,6 +155,7 @@ type ClokiBaseSettingServer struct {
 			Url         string `json:"url" mapstructure:"url" default:""`
 			App         string `json:"app" mapstructure:"app" default:""`
 			AddHostname bool   `json:"add_hostname" mapstructure:"add_hostname" default:"false"`
+			Headers     string `json:"headers" mapstructure:"headers" default:""`
 		} `json:"qryn" mapstructure:"qryn"`
 	} `json:"log_settings" mapstructure:"log_settings"`
 
