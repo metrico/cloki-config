@@ -77,6 +77,8 @@ type ClokiBaseSettingServer struct {
 		NoForceRotation      bool    `json:"no_force_rotation" mapstructure:"no_force_rotation" default:"false"`
 		QueryStats           bool    `json:"query_stats" mapstructure:"query_stats" default:"false"`
 		DynamicDatabases     bool    `json:"dynamic_databases" mapstructure:"dynamic_databases" default:"false"`
+		AWSLambda            bool    `json:"aws_lambda" mapstructure:"aws_lambda" default:"false"`
+		LicenseAutoShutdown  bool    `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	MULTITENANCE_SETTINGS struct {
