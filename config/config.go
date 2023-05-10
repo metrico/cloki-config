@@ -27,7 +27,7 @@ type ClokiBaseDataBase struct {
 	MaxOpenConn            int    `json:"max_open_connection" mapstructure:"max_open_connection" default:"50"`
 	Primary                bool   `json:"primary" mapstructure:"primary" default:"false"`
 	Strategy               string `json:"strategy" mapstructure:"strategy" default:"failover"`
-	TTLDays                int    `json:"ttl_days" mapstructure:"ttl_days" default:"7"`
+	TTLDays                int    `json:"ttl_days" mapstructure:"ttl_days" default:"0"`
 	StoragePolicy          string `json:"storage_policy" mapstructure:"storage_policy" default:""`
 	Secure                 bool   `json:"secure" mapstructure:"secure" default:"false"`
 	Cloud                  bool   `json:"cloud" mapstructure:"cloud" default:"false"`
