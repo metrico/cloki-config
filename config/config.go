@@ -79,6 +79,7 @@ type ClokiBaseSettingServer struct {
 		DynamicDatabases     bool    `json:"dynamic_databases" mapstructure:"dynamic_databases" default:"false"`
 		AWSLambda            bool    `json:"aws_lambda" mapstructure:"aws_lambda" default:"false"`
 		LicenseAutoShutdown  bool    `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
+		DynamicFolder        string  `json:"dynamic_folder" mapstructure:"dynamic_folder" default:""`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	MULTITENANCE_SETTINGS struct {
