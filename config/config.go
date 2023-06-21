@@ -178,4 +178,9 @@ type ClokiBaseSettingServer struct {
 		RemoteCheckInterval      string `json:"remote_check_interval" mapstructure:"remote_check_interval" default:"90d"`
 		GracePeriodCheckInterval string `json:"grace_check_interval" mapstructure:"grace_check_interval" default:"14d"`
 	} `json:"license_settings" mapstructure:"license_settings"`
+
+	WEBHOOKS struct {
+		LimitYellowZone string `json:"limit_yellow_zone" mapstructure:"limit_yellow_zone" default:""`
+		LimitRedZone    string `json:"limit_red_zone" mapstructure:"limit_red_zone" default:""`
+	} `json:"webhooks" mapstructure:"webhooks"`
 }
