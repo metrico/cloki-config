@@ -40,6 +40,7 @@ type ClokiBaseDataBase struct {
 	LogsIndexGranularity   uint32 `json:"logs_index_granularity" mapstructure:"logs_index_granularity" default:""`
 	ReplicatedClusterName  string `json:"replicated_cluster_name" mapstructure:"replicated_cluster_name" default:""`
 	TestDistributed        bool   `json:"test_distributed" mapstructure:"test_distributed" default:"false"`
+	Distributed            bool   `json:"distributed" mapstructure:"distributed" default:"true"`
 }
 
 type ClokiBaseSettingServer struct {
