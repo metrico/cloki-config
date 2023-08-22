@@ -81,6 +81,7 @@ type ClokiBaseSettingServer struct {
 		AWSLambda            bool    `json:"aws_lambda" mapstructure:"aws_lambda" default:"false"`
 		LicenseAutoShutdown  bool    `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
 		DynamicFolder        string  `json:"dynamic_folder" mapstructure:"dynamic_folder" default:""`
+		RedisDsn             string  `json:"redis_dsn" mapstructure:"redis_dsn" default:""`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	MULTITENANCE_SETTINGS struct {
