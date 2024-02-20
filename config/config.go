@@ -41,6 +41,11 @@ type ClokiBaseDataBase struct {
 	ReplicatedClusterName  string `json:"replicated_cluster_name" mapstructure:"replicated_cluster_name" default:""`
 	TestDistributed        bool   `json:"test_distributed" mapstructure:"test_distributed" default:"false"`
 	Distributed            bool   `json:"distributed" mapstructure:"distributed" default:"true"`
+
+	TTLPolicy []struct {
+		Timeout string `json:"ttl_policy" mapstructure:"ttl_policy" default:""`
+		MoveTo  string `json:"move_to" mapstructure:"move_to" default:""`
+	} `json:"ttl_policy" mapstructure:"ttl_policy" default:""`
 }
 
 type ClokiBaseSettingServer struct {
