@@ -61,6 +61,8 @@ type ClokiBaseSettingServer struct {
 	Validate                 *validator.Validate
 	EnvPrefix                string `default:"QRYN"`
 	PluginsPath              string `default:""`
+	AnalyticsDatabase        string `json:"analytics_database" mapstructure:"analytics_database" default:""`
+	//clickhouse://default:pass4default@127.0.0.1:8123/analytics
 
 	DATABASE_DATA []ClokiBaseDataBase `json:"database_data" mapstructure:"database_data"`
 
