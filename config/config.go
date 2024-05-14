@@ -1,8 +1,6 @@
 package config
 
 import (
-	"time"
-
 	"github.com/metrico/cloki-config/config/reader"
 	"github.com/metrico/cloki-config/config/writer"
 	"gopkg.in/go-playground/validator.v9"
@@ -53,10 +51,9 @@ type ClokiBaseSettingServer struct {
 	ClokiReader reader.ClokiReaderSettingServer `json:"reader" mapstructure:"reader"`
 
 	//Base
-	SrartTime                time.Time `default:""`
-	FingerPrintType          uint      `default:"1"`
-	DataBaseStrategy         uint      `default:"0"`
-	CurrentDataBaseIndex     uint      `default:"0"`
+	FingerPrintType          uint `default:"1"`
+	DataBaseStrategy         uint `default:"0"`
+	CurrentDataBaseIndex     uint `default:"0"`
 	DataDatabaseGroupNodeMap map[string][]string
 	Validate                 *validator.Validate
 	EnvPrefix                string `default:"QRYN"`
