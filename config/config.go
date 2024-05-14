@@ -198,4 +198,12 @@ type ClokiBaseSettingServer struct {
 		LimitYellowZone string `json:"limit_yellow_zone" mapstructure:"limit_yellow_zone" default:""`
 		LimitRedZone    string `json:"limit_red_zone" mapstructure:"limit_red_zone" default:""`
 	} `json:"webhooks" mapstructure:"webhooks"`
+
+	EXPORTER_SETTINGS struct {
+		ServerEnable bool   `json:"server_enable" mapstructure:"server_enable" default:"false"`
+		ExportEnable bool   `json:"export_enable" mapstructure:"export_enable" default:"false"`
+		Cron         string `json:"cron" mapstructure:"cron" default:""`
+		From         string `json:"from" mapstructure:"from" default:""`
+		To           string `json:"to" mapstructure:"to" default:""`
+	} `json:"exporter_settings" mapstructure:"exporter_settings"`
 }
