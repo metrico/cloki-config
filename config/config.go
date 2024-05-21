@@ -73,6 +73,8 @@ type ClokiBaseSettingServer struct {
 		UUID                 string  `json:"uuid" mapstructure:"uuid" default:""`
 		DBBulk               int     `json:"db_bulk" mapstructure:"db_bulk" default:"40000"`
 		DBTimer              float64 `json:"db_timer" mapstructure:"db_timer" default:"0.2"`
+		RetryAttempts        int     `json:"retry_attempts" mapstructure:"retry_attempts" default:"10"`
+		RetryTimeoutS        int     `json:"retry_timeout_s" mapstructure:"retry_timeout_s" default:"1"`
 		BufferSizeSample     uint32  `json:"buffer_size_sample" mapstructure:"buffer_size_sample" default:"200000"`
 		BufferSizeTimeSeries uint32  `json:"buffer_size_timeseries" mapstructure:"buffer_size_timeseries" default:"200000"`
 		ChannelsSample       int     `json:"channels_sample" mapstructure:"channels_sample" default:"2"`
