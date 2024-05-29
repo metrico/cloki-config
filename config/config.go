@@ -87,6 +87,7 @@ type ClokiBaseSettingServer struct {
 		AWSLambda            bool    `json:"aws_lambda" mapstructure:"aws_lambda" default:"false"`
 		LicenseAutoShutdown  bool    `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
 		DynamicFolder        string  `json:"dynamic_folder" mapstructure:"dynamic_folder" default:""`
+		MetricsMaxSamples    int     `json:"metrics_max_samples" mapstructure:"metrics_max_samples" default:"5000000"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
