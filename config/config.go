@@ -68,26 +68,27 @@ type ClokiBaseSettingServer struct {
 	} `json:"cluster_settings" mapstructure:"cluster_settings"`
 
 	SYSTEM_SETTINGS struct {
-		HostName             string  `json:"hostname" mapstructure:"hostname" default:"hostname"`
-		EnableUserAuditLogin bool    `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
-		UUID                 string  `json:"uuid" mapstructure:"uuid" default:""`
-		DBBulk               int     `json:"db_bulk" mapstructure:"db_bulk" default:"40000"`
-		DBTimer              float64 `json:"db_timer" mapstructure:"db_timer" default:"0.2"`
-		RetryAttempts        int     `json:"retry_attempts" mapstructure:"retry_attempts" default:"10"`
-		RetryTimeoutS        int     `json:"retry_timeout_s" mapstructure:"retry_timeout_s" default:"1"`
-		BufferSizeSample     uint32  `json:"buffer_size_sample" mapstructure:"buffer_size_sample" default:"200000"`
-		BufferSizeTimeSeries uint32  `json:"buffer_size_timeseries" mapstructure:"buffer_size_timeseries" default:"200000"`
-		ChannelsSample       int     `json:"channels_sample" mapstructure:"channels_sample" default:"2"`
-		ChannelsTimeSeries   int     `json:"channels_timeseries" mapstructure:"channels_timeseries" default:"2"`
-		HashType             string  `json:"hash_type" mapstructure:"hash_type" default:""`
-		CPUMaxProcs          int     `json:"cpu_max_procs" mapstructure:"cpu_max_procs" default:"0"`
-		NoForceRotation      bool    `json:"no_force_rotation" mapstructure:"no_force_rotation" default:"false"`
-		QueryStats           bool    `json:"query_stats" mapstructure:"query_stats" default:"false"`
-		DynamicDatabases     bool    `json:"dynamic_databases" mapstructure:"dynamic_databases" default:"false"`
-		AWSLambda            bool    `json:"aws_lambda" mapstructure:"aws_lambda" default:"false"`
-		LicenseAutoShutdown  bool    `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
-		DynamicFolder        string  `json:"dynamic_folder" mapstructure:"dynamic_folder" default:""`
-		MetricsMaxSamples    int     `json:"metrics_max_samples" mapstructure:"metrics_max_samples" default:"5000000"`
+		HostName                    string  `json:"hostname" mapstructure:"hostname" default:"hostname"`
+		EnableUserAuditLogin        bool    `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
+		UUID                        string  `json:"uuid" mapstructure:"uuid" default:""`
+		DBBulk                      int     `json:"db_bulk" mapstructure:"db_bulk" default:"40000"`
+		DBTimer                     float64 `json:"db_timer" mapstructure:"db_timer" default:"0.2"`
+		RetryAttempts               int     `json:"retry_attempts" mapstructure:"retry_attempts" default:"10"`
+		RetryTimeoutS               int     `json:"retry_timeout_s" mapstructure:"retry_timeout_s" default:"1"`
+		BufferSizeSample            uint32  `json:"buffer_size_sample" mapstructure:"buffer_size_sample" default:"200000"`
+		BufferSizeTimeSeries        uint32  `json:"buffer_size_timeseries" mapstructure:"buffer_size_timeseries" default:"200000"`
+		ChannelsSample              int     `json:"channels_sample" mapstructure:"channels_sample" default:"2"`
+		ChannelsTimeSeries          int     `json:"channels_timeseries" mapstructure:"channels_timeseries" default:"2"`
+		HashType                    string  `json:"hash_type" mapstructure:"hash_type" default:""`
+		CPUMaxProcs                 int     `json:"cpu_max_procs" mapstructure:"cpu_max_procs" default:"0"`
+		NoForceRotation             bool    `json:"no_force_rotation" mapstructure:"no_force_rotation" default:"false"`
+		QueryStats                  bool    `json:"query_stats" mapstructure:"query_stats" default:"false"`
+		DynamicDatabases            bool    `json:"dynamic_databases" mapstructure:"dynamic_databases" default:"false"`
+		DynamicDatabasesReadTimeout float64 `json:"dynamic_databases_read_timeout" mapstructure:"dynamic_databases_read_timeout" default:"0"`
+		AWSLambda                   bool    `json:"aws_lambda" mapstructure:"aws_lambda" default:"false"`
+		LicenseAutoShutdown         bool    `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
+		DynamicFolder               string  `json:"dynamic_folder" mapstructure:"dynamic_folder" default:""`
+		MetricsMaxSamples           int     `json:"metrics_max_samples" mapstructure:"metrics_max_samples" default:"5000000"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
