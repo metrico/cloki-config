@@ -104,6 +104,10 @@ type ClokiBaseSettingServer struct {
 	AUTH_SETTINGS struct {
 		AuthTokenHeader string `json:"token_header" mapstructure:"token_header" default:"Auth-Token"`
 		AuthTokenExpire uint32 `json:"token_expire" mapstructure:"token_expire" default:"1200"`
+		BASIC           struct {
+			Username string `json:"username" mapstructure:"username" default:""`
+			Password string `json:"password" mapstructure:"password" default:""`
+		}
 	} `json:"auth_settings" mapstructure:"auth_settings"`
 
 	API_SETTINGS struct {
