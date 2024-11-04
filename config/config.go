@@ -94,6 +94,7 @@ type ClokiBaseSettingServer struct {
 	WORKER struct {
 		Type         string `json:"type" mapstructure:"type" default:""`
 		SyncUrl      string `json:"sync_url" mapstructure:"sync_url" default:""`
+		MQUrl        string `json:"mq_url" mapstructure:"mq_url" default:""`
 		AwsLambdaARN string `json:"aws_lambda_arn" mapstructure:"aws_lambda_arn" default:""`
 	} `json:"worker" mapstructure:"worker"`
 
