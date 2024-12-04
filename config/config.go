@@ -3,9 +3,10 @@ package config
 import (
 	"github.com/metrico/cloki-config/config/reader"
 	"github.com/metrico/cloki-config/config/writer"
-	"gopkg.in/go-playground/validator.v9"
 )
 
+// Impportant Note.
+// All below todo are w.r.t  qryn-writer.
 // ============================ BASE ONLY ================================= //
 type ClokiBaseDataBase struct {
 	User                   string `json:"user" mapstructure:"user" default:"cloki_user"`
@@ -51,14 +52,18 @@ type ClokiBaseSettingServer struct {
 	ClokiReader reader.ClokiReaderSettingServer `json:"reader" mapstructure:"reader"`
 
 	//Base
-	FingerPrintType          uint `default:"1"`
-	DataBaseStrategy         uint `default:"0"`
-	CurrentDataBaseIndex     uint `default:"0"`
+	FingerPrintType uint `default:"1"`
+	//todo need to remove database strategy
+	DataBaseStrategy uint `default:"0"`
+	//todo need to remove CurrentDataBaseIndex
+	CurrentDataBaseIndex uint `default:"0"`
+	//todo need to remove DataDatabaseGroupNodeMap
 	DataDatabaseGroupNodeMap map[string][]string
 	Validate                 *validator.Validate
 	EnvPrefix                string `default:"QRYN"`
-	PluginsPath              string `default:""`
-	AnalyticsDatabase        string `json:"analytics_database" mapstructure:"analytics_database" default:""`
+	//todo need to remove PluginsPath
+	PluginsPath       string `default:""`
+	AnalyticsDatabase string `json:"analytics_database" mapstructure:"analytics_database" default:""`
 	//clickhouse://default:pass4default@127.0.0.1:8123/analytics
 
 	DATABASE_DATA []ClokiBaseDataBase `json:"database_data" mapstructure:"database_data"`
@@ -68,29 +73,40 @@ type ClokiBaseSettingServer struct {
 	} `json:"cluster_settings" mapstructure:"cluster_settings"`
 
 	SYSTEM_SETTINGS struct {
-		HostName                    string  `json:"hostname" mapstructure:"hostname" default:"hostname"`
-		EnableUserAuditLogin        bool    `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
-		UUID                        string  `json:"uuid" mapstructure:"uuid" default:""`
-		DBBulk                      int     `json:"db_bulk" mapstructure:"db_bulk" default:"40000"`
-		DBTimer                     float64 `json:"db_timer" mapstructure:"db_timer" default:"0.2"`
-		RetryAttempts               int     `json:"retry_attempts" mapstructure:"retry_attempts" default:"10"`
-		RetryTimeoutS               int     `json:"retry_timeout_s" mapstructure:"retry_timeout_s" default:"1"`
-		BufferSizeSample            uint32  `json:"buffer_size_sample" mapstructure:"buffer_size_sample" default:"200000"`
-		BufferSizeTimeSeries        uint32  `json:"buffer_size_timeseries" mapstructure:"buffer_size_timeseries" default:"200000"`
-		ChannelsSample              int     `json:"channels_sample" mapstructure:"channels_sample" default:"2"`
-		ChannelsTimeSeries          int     `json:"channels_timeseries" mapstructure:"channels_timeseries" default:"2"`
-		HashType                    string  `json:"hash_type" mapstructure:"hash_type" default:""`
-		CPUMaxProcs                 int     `json:"cpu_max_procs" mapstructure:"cpu_max_procs" default:"0"`
-		NoForceRotation             bool    `json:"no_force_rotation" mapstructure:"no_force_rotation" default:"false"`
-		QueryStats                  bool    `json:"query_stats" mapstructure:"query_stats" default:"false"`
-		DynamicDatabases            bool    `json:"dynamic_databases" mapstructure:"dynamic_databases" default:"false"`
+		//todo need to remove HostName
+		HostName string `json:"hostname" mapstructure:"hostname" default:"hostname"`
+		//todo need to remove EnableUserAuditLogin
+		EnableUserAuditLogin bool `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
+		//todo need to remove UUID
+		UUID string `json:"uuid" mapstructure:"uuid" default:""`
+		//todo need to remove DBBulk
+		DBBulk        int     `json:"db_bulk" mapstructure:"db_bulk" default:"40000"`
+		DBTimer       float64 `json:"db_timer" mapstructure:"db_timer" default:"0.2"`
+		RetryAttempts int     `json:"retry_attempts" mapstructure:"retry_attempts" default:"10"`
+		RetryTimeoutS int     `json:"retry_timeout_s" mapstructure:"retry_timeout_s" default:"1"`
+		//todo need to remove BufferSizeSample
+		BufferSizeSample uint32 `json:"buffer_size_sample" mapstructure:"buffer_size_sample" default:"200000"`
+		//todo need to remove BufferSizeTimeSeries
+		BufferSizeTimeSeries uint32 `json:"buffer_size_timeseries" mapstructure:"buffer_size_timeseries" default:"200000"`
+		ChannelsSample       int    `json:"channels_sample" mapstructure:"channels_sample" default:"2"`
+		ChannelsTimeSeries   int    `json:"channels_timeseries" mapstructure:"channels_timeseries" default:"2"`
+		HashType             string `json:"hash_type" mapstructure:"hash_type" default:""`
+		CPUMaxProcs          int    `json:"cpu_max_procs" mapstructure:"cpu_max_procs" default:"0"`
+		NoForceRotation      bool   `json:"no_force_rotation" mapstructure:"no_force_rotation" default:"false"`
+		//todo need to remove QueryStats
+		QueryStats       bool `json:"query_stats" mapstructure:"query_stats" default:"false"`
+		DynamicDatabases bool `json:"dynamic_databases" mapstructure:"dynamic_databases" default:"false"`
+		// todo need to remove DynamicDatabasesReadTimeout
 		DynamicDatabasesReadTimeout float64 `json:"dynamic_databases_read_timeout" mapstructure:"dynamic_databases_read_timeout" default:"0"`
-		AWSLambda                   bool    `json:"aws_lambda" mapstructure:"aws_lambda" default:"false"`
-		LicenseAutoShutdown         bool    `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
-		DynamicFolder               string  `json:"dynamic_folder" mapstructure:"dynamic_folder" default:""`
-		MetricsMaxSamples           int     `json:"metrics_max_samples" mapstructure:"metrics_max_samples" default:"5000000"`
+		//todo need to remove AWSLambda
+		AWSLambda           bool `json:"aws_lambda" mapstructure:"aws_lambda" default:"false"`
+		LicenseAutoShutdown bool `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
+		//todo need to remove DynamicFolder
+		DynamicFolder string `json:"dynamic_folder" mapstructure:"dynamic_folder" default:""`
+		//todo need  to remove MetricsMaxSamples
+		MetricsMaxSamples int `json:"metrics_max_samples" mapstructure:"metrics_max_samples" default:"5000000"`
 	} `json:"system_settings" mapstructure:"system_settings"`
-
+	//todo  need to remove WORKER
 	WORKER struct {
 		Type         string `json:"type" mapstructure:"type" default:""`
 		SyncUrl      string `json:"sync_url" mapstructure:"sync_url" default:""`
@@ -110,18 +126,18 @@ type ClokiBaseSettingServer struct {
 			Password string `json:"password" mapstructure:"password" default:""`
 		}
 	} `json:"auth_settings" mapstructure:"auth_settings"`
-
+	// todo need to remove API_SETTINGS
 	API_SETTINGS struct {
 		EnableForceSync   bool `json:"sync_map_force" mapstructure:"sync_map_force" default:"false"`
 		EnableTokenAccess bool `json:"enable_token_access" mapstructure:"enable_token_access" default:"true"`
 	} `json:"api_settings" mapstructure:"api_settings"`
-
+	// todo need to remove SCRIPT_SETTINGS
 	SCRIPT_SETTINGS struct {
 		Enable bool   `json:"enable" mapstructure:"enable" default:"false"`
 		Engine string `json:"engine" mapstructure:"engine" default:"lua"`
 		Folder string `json:"folder" mapstructure:"folder" default:"/usr/local/qryn/scripts/"`
 	} `json:"script_settings" mapstructure:"script_settings"`
-
+	// todo need to remove FORWARD_SETTINGS
 	FORWARD_SETTINGS struct {
 		ForwardUrl     string `json:"forward_url" mapstructure:"forward_url" default:""`
 		ForwardLabels  string `json:"forward_labels" mapstructure:"forward_labels" default:""`
@@ -129,19 +145,27 @@ type ClokiBaseSettingServer struct {
 	} `json:"forward_settings" mapstructure:"forward_settings"`
 
 	HTTP_SETTINGS struct {
-		Host          string `json:"host" mapstructure:"host" default:"0.0.0.0"`
-		Port          int    `json:"port" mapstructure:"port" default:"3200"`
-		ApiPrefix     string `json:"api_prefix" mapstructure:"api_prefix" default:""`
+		Host string `json:"host" mapstructure:"host" default:"0.0.0.0"`
+		Port int    `json:"port" mapstructure:"port" default:"3200"`
+		// todo need to remove ApiPrefix
+		ApiPrefix string `json:"api_prefix" mapstructure:"api_prefix" default:""`
+		// todo need to remove ApiPromPrefix
 		ApiPromPrefix string `json:"api_prom_prefix" mapstructure:"api_prom_prefix" default:""`
 		Prefork       bool   `json:"prefork" mapstructure:"prefork" default:"false"`
-		Gzip          bool   `json:"gzip" mapstructure:"gzip" default:"true"`
-		GzipStatic    bool   `json:"gzip_static" mapstructure:"gzip_static" default:"true"`
-		Debug         bool   `json:"debug" mapstructure:"debug" default:"false"`
-		Concurrency   int    `json:"concurrency" mapstructure:"concurrency" default:"350"`
-		Cors          struct {
+		// todo need to remove Gzip
+		Gzip bool `json:"gzip" mapstructure:"gzip" default:"true"`
+		// todo need to remove GzipStatic
+		GzipStatic bool `json:"gzip_static" mapstructure:"gzip_static" default:"true"`
+		// todo need to remove Debug
+		Debug bool `json:"debug" mapstructure:"debug" default:"false"`
+		// todo need to remove Concurrency
+		Concurrency int `json:"concurrency" mapstructure:"concurrency" default:"350"`
+		//todo need to remove Cors
+		Cors struct {
 			Origin string `json:"origin" mapstructure:"origin" default:"*"`
 			Enable bool   `json:"enable" mapstructure:"enable" default:"false"`
 		} `json:"cors" mapstructure:"cors"`
+		//todo need to remove WebSocket
 		WebSocket struct {
 			Enable bool `json:"enable" mapstructure:"enable" default:"false"`
 		} `json:"websocket" mapstructure:"websocket"`
@@ -204,7 +228,7 @@ type ClokiBaseSettingServer struct {
 		LimitYellowZone string `json:"limit_yellow_zone" mapstructure:"limit_yellow_zone" default:""`
 		LimitRedZone    string `json:"limit_red_zone" mapstructure:"limit_red_zone" default:""`
 	} `json:"webhooks" mapstructure:"webhooks"`
-
+	//todo remove  EXPORTER_SETTINGS
 	EXPORTER_SETTINGS struct {
 		ServerEnable bool   `json:"server_enable" mapstructure:"server_enable" default:"false"`
 		ExportEnable bool   `json:"export_enable" mapstructure:"export_enable" default:"false"`

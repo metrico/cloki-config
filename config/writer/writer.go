@@ -16,7 +16,6 @@ type MQTTTopicConf struct {
 	// ns, us, ms, s, m, h
 	TimeUnit string `json:"time_unit" mapstructure:"time_unit" default:""`
 }
-
 type KafkaTopicConf struct {
 	Name           string            `json:"name" mapstructure:"name" default:""`
 	Tags           map[string]string `json:"tags" mapstructure:"tags" default:""`
@@ -31,6 +30,7 @@ type KafkaTopicConf struct {
 	Type         string     `json:"type" mapstructure:"type" default:""`
 }
 
+// KafkaConf if we remove kafkaconf logic from qryn-writer then we need to remove  KafkaConf
 type KafkaConf struct {
 	Host string `json:"host" mapstructure:"host" default:""`
 	Port int    `json:"port" mapstructure:"port" default:"0"`
@@ -53,7 +53,6 @@ type PrometheusScrape struct {
 	OrgID string `json:"org_id" mapstructure:"org_id" default:"0"`
 }
 
-//
 type ClokiWriterSettingServer struct {
 	MQTT_CLIENT struct {
 		SessID     string        `json:"session" mapstructure:"session" default:"cloki-client"`
