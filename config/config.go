@@ -39,6 +39,8 @@ type ClokiBaseDataBase struct {
 	ReplicatedClusterName  string `json:"replicated_cluster_name" mapstructure:"replicated_cluster_name" default:""`
 	TestDistributed        bool   `json:"test_distributed" mapstructure:"test_distributed" default:"false"`
 	Distributed            bool   `json:"distributed" mapstructure:"distributed" default:"true"`
+	SamplesOrdering        bool   `json:"samples_ordering" mapstructure:"samples_ordering" default:"false"`
+	SkipUnavailableShards  bool   `json:"skip_unavailable_shards" mapstructure:"skip_unavailable_shards" default:"false"`
 
 	TTLPolicy []struct {
 		Timeout string `json:"ttl_policy" mapstructure:"ttl_policy" default:""`
@@ -89,6 +91,8 @@ type ClokiBaseSettingServer struct {
 		LicenseAutoShutdown         bool    `json:"license_auto_shutdown" mapstructure:"license_auto_shutdown" default:"false"`
 		DynamicFolder               string  `json:"dynamic_folder" mapstructure:"dynamic_folder" default:""`
 		MetricsMaxSamples           int     `json:"metrics_max_samples" mapstructure:"metrics_max_samples" default:"5000000"`
+		MaxSeries                   int     `json:"max_series" mapstructure:"max_series" default:"0"`
+		Mode                        string  `json:"mode" mapstructure:"mode" default:""`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
