@@ -39,7 +39,7 @@ type ClokiBaseDataBase struct {
 	ReplicatedClusterName  string `json:"replicated_cluster_name" mapstructure:"replicated_cluster_name" default:""`
 	TestDistributed        bool   `json:"test_distributed" mapstructure:"test_distributed" default:"false"`
 	Distributed            bool   `json:"distributed" mapstructure:"distributed" default:"true"`
-	SamplesOrdering        bool   `json:"samples_ordering" mapstructure:"samples_ordering" default:"false"`
+	SamplesOrdering        string `json:"samples_ordering" mapstructure:"samples_ordering" default:"false"`
 	SkipUnavailableShards  bool   `json:"skip_unavailable_shards" mapstructure:"skip_unavailable_shards" default:"false"`
 
 	TTLPolicy []struct {
