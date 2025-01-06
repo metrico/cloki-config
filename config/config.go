@@ -93,6 +93,7 @@ type ClokiBaseSettingServer struct {
 		MetricsMaxSamples           int     `json:"metrics_max_samples" mapstructure:"metrics_max_samples" default:"5000000"`
 		MaxSeries                   int     `json:"max_series" mapstructure:"max_series" default:"0"`
 		Mode                        string  `json:"mode" mapstructure:"mode" default:""`
+		TotalRateLimit              int     `json:"total_rate_limit" mapstructure:"total_rate_limit" default:"80"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
