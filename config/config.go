@@ -73,7 +73,7 @@ type ClokiBaseSettingServer struct {
 		HostName                    string  `json:"hostname" mapstructure:"hostname" default:"hostname"`
 		EnableUserAuditLogin        bool    `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
 		UUID                        string  `json:"uuid" mapstructure:"uuid" default:""`
-		DBBulk                      int     `json:"db_bulk" mapstructure:"db_bulk" default:"40000"`
+		DBBulk                      int64   `json:"db_bulk" mapstructure:"db_bulk" default:"0"`
 		DBTimer                     float64 `json:"db_timer" mapstructure:"db_timer" default:"0.2"`
 		RetryAttempts               int     `json:"retry_attempts" mapstructure:"retry_attempts" default:"10"`
 		RetryTimeoutS               int     `json:"retry_timeout_s" mapstructure:"retry_timeout_s" default:"1"`
