@@ -135,7 +135,7 @@ type ClokiBaseSettingServer struct {
 
 	HTTP_SETTINGS struct {
 		Host          string `json:"host" mapstructure:"host" default:"0.0.0.0"`
-		Port          int    `json:"port" mapstructure:"port" default:"3200"`
+		Port          int    `json:"port" mapstructure:"port" default:"0"`
 		ApiPrefix     string `json:"api_prefix" mapstructure:"api_prefix" default:""`
 		ApiPromPrefix string `json:"api_prom_prefix" mapstructure:"api_prom_prefix" default:""`
 		Prefork       bool   `json:"prefork" mapstructure:"prefork" default:"false"`
