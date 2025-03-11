@@ -41,6 +41,7 @@ type ClokiBaseDataBase struct {
 	Distributed            bool   `json:"distributed" mapstructure:"distributed" default:"true"`
 	SamplesOrdering        string `json:"samples_ordering" mapstructure:"samples_ordering" default:"false"`
 	SkipUnavailableShards  bool   `json:"skip_unavailable_shards" mapstructure:"skip_unavailable_shards" default:"false"`
+	InsecureSkipVerify     bool   `json:"insecure_skip_verify" mapstructure:"insecure_skip_verify" default:"false"`
 
 	TTLPolicy []struct {
 		Timeout string `json:"ttl_policy" mapstructure:"ttl_policy" default:""`
