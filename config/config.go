@@ -95,6 +95,7 @@ type ClokiBaseSettingServer struct {
 		MaxSeries                   int     `json:"max_series" mapstructure:"max_series" default:"0"`
 		Mode                        string  `json:"mode" mapstructure:"mode" default:""`
 		TotalRateLimitMB            int     `json:"total_rate_limit_mb" mapstructure:"total_rate_limit_mb" default:"80"`
+		MaxParallelQueries          int     `json:"max_parallel_queries" mapstructure:"max_parallel_queries" default:"0"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
