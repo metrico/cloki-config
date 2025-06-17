@@ -182,6 +182,7 @@ type ClokiBaseSettingServer struct {
 		SysLog        bool   `json:"syslog" mapstructure:"syslog" default:"false"`
 		SyslogUri     string `json:"syslog_uri" mapstructure:"syslog_uri" default:""`
 		TracesUrl     string `json:"traces_url" mapstructure:"traces_url" default:""`
+		InstanceName  string `json:"instance_name" mapstructure:"instance_name" default:""`
 		Qryn          struct {
 			Url         string `json:"url" mapstructure:"url" default:""`
 			App         string `json:"app" mapstructure:"app" default:""`
