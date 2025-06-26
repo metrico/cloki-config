@@ -70,6 +70,13 @@ type ClokiBaseSettingServer struct {
 		DistributionHeader bool `json:"distribution_header" mapstructure:"distribution_header" default:"false"`
 	} `json:"cluster_settings" mapstructure:"cluster_settings"`
 
+	DRILLDOWN_SETTINGS struct {
+		LogDrilldown            bool    `json:"log_drilldown" mapstructure:"log_drilldown" default:"false"`
+		LogPatternsSimilarity   float64 `json:"log_patterns_similarity" mapstructure:"pattern_similarity" default:"0.7"`
+		LogPatternsReadLimit    int     `json:"log_patterns_read_limit" mapstructure:"patterns_read_limit" default:"300"`
+		LogPatternsDownsampling float64 `json:"log_patterns_downsampling" mapstructure:"patterns_downsampling" default:"1"`
+	} `json:"drilldown_settings" mapstructure:"drilldown_settings"`
+
 	SYSTEM_SETTINGS struct {
 		HostName                    string  `json:"hostname" mapstructure:"hostname" default:"hostname"`
 		EnableUserAuditLogin        bool    `json:"user_audit_login" mapstructure:"user_audit_login" default:"true"`
