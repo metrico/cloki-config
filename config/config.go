@@ -4,6 +4,7 @@ import (
 	"github.com/metrico/cloki-config/config/reader"
 	"github.com/metrico/cloki-config/config/writer"
 	"gopkg.in/go-playground/validator.v9"
+	"strings"
 )
 
 // ============================ BASE ONLY ================================= //
@@ -232,4 +233,21 @@ type ClokiBaseSettingServer struct {
 		From         string `json:"from" mapstructure:"from" default:""`
 		To           string `json:"to" mapstructure:"to" default:""`
 	} `json:"exporter_settings" mapstructure:"exporter_settings"`
+}
+
+func (c ClokiBaseSettingServer) PyroscopeExtraTags() map[string]string {
+	res := make(map[string]string)
+	kvs := strings.Split(c.SYSTEM_SETTINGS.PyroscopeExtraTags, ";")
+	for _, kv := range kvs {
+		_kv := strings.SplitN(kv, "=", 2)
+		if len(_kv) != 2 {
+			continue
+		}
+		_kv[0] = strings.TrimSpace(_kv[0])
+		_kv[1] = strings.TrimSpace(_kv[1])
+		if _kv[0] != "" && _kv[1] != "" {
+			res[_kv[0]] = _kv[1]
+		}
+	}
+	return res
 }
