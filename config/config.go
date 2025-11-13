@@ -105,6 +105,7 @@ type ClokiBaseSettingServer struct {
 		RateLimitPerDBMB            int     `json:"rate_limit_per_db_mb" mapstructure:"rate_limit_per_db_mb" default:"50"`
 		MaxParallelQueries          int     `json:"max_parallel_queries" mapstructure:"max_parallel_queries" default:"0"`
 		PyroscopeServerURL          string  `json:"pyroscope_server_url" mapstructure:"pyroscope_server_url" default:""`
+		PyroscopeExtraTags          string  `json:"pyroscope_extra_tags" mapstructure:"pyroscope_extra_tags"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
