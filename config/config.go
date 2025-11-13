@@ -104,13 +104,16 @@ type ClokiBaseSettingServer struct {
 		TotalRateLimitMB            int     `json:"total_rate_limit_mb" mapstructure:"total_rate_limit_mb" default:"80"`
 		RateLimitPerDBMB            int     `json:"rate_limit_per_db_mb" mapstructure:"rate_limit_per_db_mb" default:"50"`
 		MaxParallelQueries          int     `json:"max_parallel_queries" mapstructure:"max_parallel_queries" default:"0"`
+		PyroscopeServerURL          string  `json:"pyroscope_server_url" mapstructure:"pyroscope_server_url" default:""`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
-		Type         string `json:"type" mapstructure:"type" default:""`
-		SyncUrl      string `json:"sync_url" mapstructure:"sync_url" default:""`
-		MQUrl        string `json:"mq_url" mapstructure:"mq_url" default:""`
-		AwsLambdaARN string `json:"aws_lambda_arn" mapstructure:"aws_lambda_arn" default:""`
+		Type                    string `json:"type" mapstructure:"type" default:""`
+		SyncUrl                 string `json:"sync_url" mapstructure:"sync_url" default:""`
+		MQUrl                   string `json:"mq_url" mapstructure:"mq_url" default:""`
+		AwsLambdaARN            string `json:"aws_lambda_arn" mapstructure:"aws_lambda_arn" default:""`
+		AlertManagerURL         string `json:"alert_manager_url" mapstructure:"alert_manager_url" default:""`
+		RecordingRulesWriterURL string `json:"recording_rules_writer" mapstructure:"recording_rules_writer" default:""`
 	} `json:"worker" mapstructure:"worker"`
 
 	MULTITENANCE_SETTINGS struct {
