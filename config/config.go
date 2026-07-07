@@ -107,6 +107,13 @@ type ClokiBaseSettingServer struct {
 		MaxParallelQueries          int     `json:"max_parallel_queries" mapstructure:"max_parallel_queries" default:"0"`
 		PyroscopeServerURL          string  `json:"pyroscope_server_url" mapstructure:"pyroscope_server_url" default:""`
 		PyroscopeExtraTags          string  `json:"pyroscope_extra_tags" mapstructure:"pyroscope_extra_tags"`
+		// OsThreadPriority* scale the ClickHouse os_thread_priority (OS nice value,
+		// lower = higher priority) applied to read queries by their time span, so
+		// short requests keep scheduler priority under load. Disabled when Max <= 0.
+		OsThreadPriorityMin      int `json:"os_thread_priority_min" mapstructure:"os_thread_priority_min" default:"5"`
+		OsThreadPriorityMax      int `json:"os_thread_priority_max" mapstructure:"os_thread_priority_max" default:"18"`
+		OsThreadPriorityMinSpanS int `json:"os_thread_priority_min_span_s" mapstructure:"os_thread_priority_min_span_s" default:"1800"`
+		OsThreadPriorityMaxSpanS int `json:"os_thread_priority_max_span_s" mapstructure:"os_thread_priority_max_span_s" default:"604800"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
