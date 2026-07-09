@@ -114,6 +114,14 @@ type ClokiBaseSettingServer struct {
 		OsThreadPriorityMax      int `json:"os_thread_priority_max" mapstructure:"os_thread_priority_max" default:"18"`
 		OsThreadPriorityMinSpanS int `json:"os_thread_priority_min_span_s" mapstructure:"os_thread_priority_min_span_s" default:"1800"`
 		OsThreadPriorityMaxSpanS int `json:"os_thread_priority_max_span_s" mapstructure:"os_thread_priority_max_span_s" default:"604800"`
+		// Split read queries into two queues by their time span so a few heavy,
+		// long-span queries can't starve the many light ones. Queries whose span
+		// (to-from) exceeds ComplexQuerySpanS use the complex queue, the rest use
+		// the simple queue. Disabled when ComplexQuerySpanS <= 0, in which case
+		// MaxParallelQueries keeps its legacy single-queue behaviour.
+		SimpleQueueParallel  int `json:"simple_queue_parallel" mapstructure:"simple_queue_parallel" default:"5"`
+		ComplexQueueParallel int `json:"complex_queue_parallel" mapstructure:"complex_queue_parallel" default:"1"`
+		ComplexQuerySpanS    int `json:"complex_query_span_s" mapstructure:"complex_query_span_s" default:"0"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
