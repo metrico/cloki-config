@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/metrico/cloki-config/config/deleter"
 	"github.com/metrico/cloki-config/config/reader"
 	"github.com/metrico/cloki-config/config/writer"
 	"gopkg.in/go-playground/validator.v9"
@@ -51,8 +52,9 @@ type ClokiBaseDataBase struct {
 }
 
 type ClokiBaseSettingServer struct {
-	ClokiWriter writer.ClokiWriterSettingServer `json:"writer" mapstructure:"writer"`
-	ClokiReader reader.ClokiReaderSettingServer `json:"reader" mapstructure:"reader"`
+	ClokiWriter  writer.ClokiWriterSettingServer   `json:"writer" mapstructure:"writer"`
+	ClokiReader  reader.ClokiReaderSettingServer   `json:"reader" mapstructure:"reader"`
+	ClokiDeleter deleter.ClokiDeleterSettingServer `json:"deleter" mapstructure:"deleter"`
 
 	//Base
 	FingerPrintType          uint `default:"1"`
