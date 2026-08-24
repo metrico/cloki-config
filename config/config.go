@@ -124,6 +124,11 @@ type ClokiBaseSettingServer struct {
 		SimpleQueueParallel  int `json:"simple_queue_parallel" mapstructure:"simple_queue_parallel" default:"5"`
 		ComplexQueueParallel int `json:"complex_queue_parallel" mapstructure:"complex_queue_parallel" default:"1"`
 		ComplexQuerySpanS    int `json:"complex_query_span_s" mapstructure:"complex_query_span_s" default:"0"`
+		// OTLPMaxMessageSize caps the size in bytes of a single OTLP export
+		// request on both transports: the gRPC server's max receive message
+		// size and the OTLP/HTTP request body limit. Values <= 0 mean the
+		// consumer's built-in default (64 MiB).
+		OTLPMaxMessageSize int `json:"otlp_max_message_size" mapstructure:"otlp_max_message_size" default:"67108864"`
 	} `json:"system_settings" mapstructure:"system_settings"`
 
 	WORKER struct {
